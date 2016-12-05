@@ -679,6 +679,7 @@ MonoBehaviour:
     AppSecret: 32286bd6ce75c0672c0967eb53b6b0d3
     ApplicationDataPath: app
     ForceVersion: 1
+    UseTorrents: 1
 --- !u!114 &377531154
 MonoBehaviour:
   m_ObjectHideFlags: 0

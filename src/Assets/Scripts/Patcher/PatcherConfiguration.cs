@@ -19,5 +19,10 @@ namespace PatchKit.Unity.Patcher
         /// Forced application version to download. If equals to <c>0</c>, the newest application version is downloaded.
         /// </summary>
         public int ForceVersion;
+
+        /// <summary>
+        /// Should patcher use torrent downloader.
+        /// </summary>
+        public bool UseTorrents;
     }
 }

@@ -230,29 +230,48 @@ namespace PatchKit.Unity.Patcher
         {
             string torrentPath = packagePath + ".torrent";
 
-            try
+            bool downloaded = false;
+
+            if (_configuration.UseTorrents)
             {
-                LogInfo("Trying to download with torrent.");
+                try
+                {
+                    LogInfo("Trying to download with torrent.");
 
-                LogInfo(string.Format("Starting download of torrent file from {0} to {1}.", torrentUrl, torrentPath));
-                _httpDownloader.DownloadFile(torrentUrl, torrentPath, 0, 0, 0, (progress, speed, bytes, totalBytes) => { },
-                    cancellationToken);
+                    LogInfo(string.Format("Starting download of torrent file from {0} to {1}.", torrentUrl, torrentPath));
+                    _httpDownloader.DownloadFile(torrentUrl, torrentPath, 0, 0, 0,
+                        (progress, speed, bytes, totalBytes) => { },
+                        cancellationToken);
 
-                LogInfo("Torrent file has been downloaded.");
+                    LogInfo("Torrent file has been downloaded.");
 
-                LogInfo(string.Format("Starting torrent download of package to {0}.", packagePath));
+                    LogInfo(string.Format("Starting torrent download of package to {0}.", packagePath));
 
-                _torrentDownloader.DownloadFile(torrentPath, packagePath,
-                    (progress, speed, bytes, totalBytes) =>
-                        OnDownloadProgress(downloadProgress, progress, speed, bytes, totalBytes), cancellationToken);
+                    _torrentDownloader.DownloadFile(torrentPath, packagePath,
+                        (progress, speed, bytes, totalBytes) =>
+                            OnDownloadProgress(downloadProgress, progress, speed, bytes, totalBytes), cancellationToken);
+
+                    downloaded = true;
+                }
+                catch (Exception exception)
+                {
+                    LogError(exception.ToString());
+                    LogWarning("Failed to download with torrent.");
+                }
+                finally
+                {
+                    LogInfo("Cleaning up torrent downloading.");
+
+                    if (File.Exists(torrentPath))
+                    {
+                        File.Delete(torrentPath);
+                    }
+                }
             }
-            catch (Exception exception)
-            {
-                LogError(exception.ToString());
-                LogWarning("Failed to download with torrent.");
-                LogInfo("Trying to download with HTTP.");
 
-                bool downloaded;
+            if (!downloaded)
+            {
+                LogInfo("Trying to download with HTTP.");
 
                 try
                 {
@@ -266,13 +285,14 @@ namespace PatchKit.Unity.Patcher
                                 OnDownloadProgress(downloadProgress, progress, speed, bytes, totalBytes);
                             downloaded = downloader.Start(cancellationToken);
                         }
-                    } else
+                    }
+                    else
                     {
                         // continuous file downloading method
                         downloaded = _httpDownloader.DownloadFile(
                             httpUrls, packagePath, packageSize, (progress, speed, bytes, totalBytes) =>
-                            OnDownloadProgress(downloadProgress, progress, speed, bytes, totalBytes),
-                        cancellationToken);
+                                OnDownloadProgress(downloadProgress, progress, speed, bytes, totalBytes),
+                            cancellationToken);
                     }
                 }
                 catch (Exception exception2)
@@ -280,20 +300,11 @@ namespace PatchKit.Unity.Patcher
                     LogError(exception2.ToString());
                     downloaded = false;
                 }
-
-                if (!downloaded)
-                {
-                    throw new Exception("Failed to download content package from any sources.");
-                }
             }
-            finally
-            {
-                LogInfo("Cleaning up package downloading.");
 
-                if (File.Exists(torrentPath))
-                {
-                    File.Delete(torrentPath);
-                }
+            if (!downloaded)
+            {
+                throw new Exception("Failed to download content package from any sources.");
             }
         }
 
