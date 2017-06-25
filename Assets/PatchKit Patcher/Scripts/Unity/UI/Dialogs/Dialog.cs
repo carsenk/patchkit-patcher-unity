@@ -1,7 +1,7 @@
 using System.Threading;
 using PatchKit.Patcher.Cancellation;
+using PatchKit.Patcher.Debug;
 using UnityEngine;
-using PatchKit.Unity.Patcher.Debug;
 
 namespace PatchKit.Patcher.Unity.UI.Dialogs
 {

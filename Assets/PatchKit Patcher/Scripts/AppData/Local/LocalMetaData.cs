@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
-using PatchKit.Unity.Patcher.Debug;
+using PatchKit.Patcher.Debug;
 
 namespace PatchKit.Patcher.AppData.Local
 {

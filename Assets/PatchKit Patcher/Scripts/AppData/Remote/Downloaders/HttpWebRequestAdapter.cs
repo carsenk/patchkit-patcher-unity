@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using PatchKit.Unity.Patcher.Debug;
+using PatchKit.Patcher.Debug;
 
 namespace PatchKit.Patcher.AppData.Remote.Downloaders
 {

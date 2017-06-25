@@ -1,5 +1,5 @@
 ﻿using PatchKit.Patcher.Cancellation;
-using PatchKit.Unity.Patcher.Debug;
+using PatchKit.Patcher.Debug;
 
 namespace PatchKit.Patcher.AppUpdater
 {

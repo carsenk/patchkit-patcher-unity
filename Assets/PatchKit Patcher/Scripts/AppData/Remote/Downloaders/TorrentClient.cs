@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json.Linq;
-using PatchKit.Unity.Patcher.Debug;
+using PatchKit.Patcher.Debug;
 
 namespace PatchKit.Patcher.AppData.Remote.Downloaders
 {

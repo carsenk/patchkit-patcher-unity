@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Net;
-using PatchKit.Unity.Patcher.Debug;
+using PatchKit.Patcher.Debug;
 
 namespace PatchKit.Unity.Utilities
 {

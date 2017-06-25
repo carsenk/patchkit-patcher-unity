@@ -1,5 +1,5 @@
 ﻿using System;
-using PatchKit.Unity.Patcher.Debug;
+using PatchKit.Patcher.Debug;
 
 namespace PatchKit.Unity.Patcher.Status
 {

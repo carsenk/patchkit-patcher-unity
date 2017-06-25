@@ -9,7 +9,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.Experimental.Networking;
 
-namespace PatchKit.Unity.Patcher.Debug
+namespace PatchKit.Patcher.Debug
 {
     public class PatcherLogSender : MonoBehaviour
     {

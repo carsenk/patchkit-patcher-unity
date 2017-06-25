@@ -5,8 +5,8 @@ using System.Net;
 using System.Threading;
 using Newtonsoft.Json.Linq;
 using PatchKit.Patcher.Cancellation;
+using PatchKit.Patcher.Debug;
 using PatchKit.Patcher.Unity;
-using PatchKit.Unity.Patcher.Debug;
 using PatchKit.Unity.Utilities;
 using UnityEngine;
 

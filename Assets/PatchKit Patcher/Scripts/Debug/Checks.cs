@@ -2,7 +2,7 @@
 using System.IO;
 using PatchKit.Patcher.AppData.Remote;
 
-namespace PatchKit.Unity.Patcher.Debug
+namespace PatchKit.Patcher.Debug
 {
     public class Checks
     {

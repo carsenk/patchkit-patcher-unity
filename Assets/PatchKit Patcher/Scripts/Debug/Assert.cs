@@ -1,4 +1,6 @@
-﻿namespace PatchKit.Unity.Patcher.Debug
+﻿using PatchKit.Unity.Patcher;
+
+namespace PatchKit.Patcher.Debug
 {
     public class Assert
     {

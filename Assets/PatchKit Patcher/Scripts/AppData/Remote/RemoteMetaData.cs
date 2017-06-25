@@ -1,7 +1,7 @@
 ﻿using PatchKit.Api;
 using PatchKit.Api.Models.Main;
+using PatchKit.Patcher.Debug;
 using PatchKit.Unity;
-using PatchKit.Unity.Patcher.Debug;
 using PatchKit.Unity.Utilities;
 using UnityEngine;
 

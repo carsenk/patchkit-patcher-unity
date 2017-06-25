@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using PatchKit.Patcher.AppData;
-using PatchKit.Unity.Patcher.Debug;
+using PatchKit.Patcher.Debug;
 using PatchKit.Unity.Utilities;
 
 namespace PatchKit.Unity.Patcher

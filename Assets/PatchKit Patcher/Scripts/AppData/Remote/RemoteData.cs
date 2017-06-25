@@ -2,8 +2,8 @@
 using System.Linq;
 using PatchKit.Api;
 using PatchKit.Patcher.AppData.Remote.Downloaders;
+using PatchKit.Patcher.Debug;
 using PatchKit.Unity;
-using PatchKit.Unity.Patcher.Debug;
 
 namespace PatchKit.Patcher.AppData.Remote
 {

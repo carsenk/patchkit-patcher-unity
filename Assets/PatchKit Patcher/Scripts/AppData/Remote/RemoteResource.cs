@@ -1,6 +1,4 @@
-﻿using PatchKit.Unity.Patcher.Debug;
-
-namespace PatchKit.Patcher.AppData.Remote
+﻿namespace PatchKit.Patcher.AppData.Remote
 {
     public struct RemoteResource
     {

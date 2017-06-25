@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using PatchKit.Unity.Patcher.Debug;
+using PatchKit.Patcher.Debug;
 
 namespace PatchKit.Patcher.AppData
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PatchKit.Unity.Patcher.Debug
+namespace PatchKit.Patcher.Debug
 {
     public static class EnvironmentInfo
     {

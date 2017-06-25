@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using PatchKit.Unity.Patcher.Debug;
+using PatchKit.Patcher.Debug;
 using PatchKit.Unity.Utilities;
 using UnityEngine;
 

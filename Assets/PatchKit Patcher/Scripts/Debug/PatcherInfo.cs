@@ -3,7 +3,7 @@ using System.IO;
 using PatchKit.Unity.Utilities;
 using UnityEngine;
 
-namespace PatchKit.Unity.Patcher.Debug
+namespace PatchKit.Patcher.Debug
 {
     public static class PatcherInfo
     {

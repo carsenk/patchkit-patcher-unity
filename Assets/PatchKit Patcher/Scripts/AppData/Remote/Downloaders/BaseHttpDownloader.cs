@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Net;
 using PatchKit.Patcher.Cancellation;
-using PatchKit.Unity.Patcher.Debug;
+using PatchKit.Patcher.Debug;
 
 namespace PatchKit.Patcher.AppData.Remote.Downloaders
 {

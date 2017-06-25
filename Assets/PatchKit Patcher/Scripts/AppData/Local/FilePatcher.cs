@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using PatchKit.Unity.Patcher.Debug;
+using PatchKit.Patcher.Debug;
 
 namespace PatchKit.Patcher.AppData.Local
 {

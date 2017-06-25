@@ -4,8 +4,8 @@ using PatchKit.Api;
 using PatchKit.Patcher.AppData.Local;
 using PatchKit.Patcher.AppData.Remote;
 using PatchKit.Patcher.Cancellation;
+using PatchKit.Patcher.Debug;
 using PatchKit.Patcher.Unity.UI.Dialogs;
-using PatchKit.Unity.Patcher.Debug;
 using PatchKit.Unity.Patcher.Status;
 
 namespace PatchKit.Patcher.AppUpdater.Commands

@@ -4,7 +4,7 @@ using System.Linq;
 using PatchKit.Patcher.AppData;
 using PatchKit.Patcher.AppData.Local;
 using PatchKit.Patcher.AppData.Remote;
-using PatchKit.Unity.Patcher.Debug;
+using PatchKit.Patcher.Debug;
 
 namespace PatchKit.Unity.Patcher
 {

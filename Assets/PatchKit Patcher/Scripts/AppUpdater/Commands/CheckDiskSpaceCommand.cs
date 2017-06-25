@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using PatchKit.Api.Models.Main;
 using PatchKit.Patcher.Cancellation;
-using PatchKit.Unity.Patcher.Debug;
+using PatchKit.Patcher.Debug;
 using PatchKit.Unity.Patcher.Status;
 
 namespace PatchKit.Patcher.AppUpdater.Commands
