@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Runtime.InteropServices;
 using PatchKit.Api.Models.Main;
-using PatchKit.Unity.Patcher.Cancellation;
+using PatchKit.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Debug;
 using PatchKit.Unity.Patcher.Status;
 

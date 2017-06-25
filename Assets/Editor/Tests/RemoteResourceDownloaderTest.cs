@@ -4,7 +4,7 @@ using NSubstitute;
 using NUnit.Framework;
 using PatchKit.Patcher.AppData.Remote;
 using PatchKit.Patcher.AppData.Remote.Downloaders;
-using PatchKit.Unity.Patcher.Cancellation;
+using PatchKit.Patcher.Cancellation;
 
 public class RemoteResourceDownloaderTest
 {

@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using Ionic.Zlib;
-using PatchKit.Unity.Patcher.Cancellation;
+using PatchKit.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Debug;
 using PatchKit.Unity.Utilities;
 using CompressionMode = System.IO.Compression.CompressionMode;

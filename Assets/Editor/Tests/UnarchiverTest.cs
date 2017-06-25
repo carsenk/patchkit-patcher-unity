@@ -2,7 +2,7 @@
 using System.IO;
 using NUnit.Framework;
 using PatchKit.Patcher.AppData.Local;
-using PatchKit.Unity.Patcher.Cancellation;
+using PatchKit.Patcher.Cancellation;
 
 class UnarchiverTest
 {

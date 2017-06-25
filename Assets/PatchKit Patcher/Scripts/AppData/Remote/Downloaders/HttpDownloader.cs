@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
-using PatchKit.Unity.Patcher.Cancellation;
+using PatchKit.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Debug;
 
 namespace PatchKit.Patcher.AppData.Remote.Downloaders

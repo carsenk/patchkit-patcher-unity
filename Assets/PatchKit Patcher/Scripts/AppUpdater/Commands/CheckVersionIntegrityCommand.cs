@@ -2,7 +2,7 @@
 using PatchKit.Api.Models.Main;
 using PatchKit.Patcher.AppData;
 using PatchKit.Patcher.AppData.Local;
-using PatchKit.Unity.Patcher.Cancellation;
+using PatchKit.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Debug;
 using PatchKit.Unity.Patcher.Status;
 

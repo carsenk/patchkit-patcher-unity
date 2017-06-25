@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using PatchKit.Unity.Patcher.Debug;
-using CancellationToken = PatchKit.Unity.Patcher.Cancellation.CancellationToken;
+using CancellationToken = PatchKit.Patcher.Cancellation.CancellationToken;
 
 namespace PatchKit.Patcher.AppData.Remote.Downloaders
 {

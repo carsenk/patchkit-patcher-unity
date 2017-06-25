@@ -5,8 +5,8 @@ using NUnit.Framework;
 using PatchKit.Api.Models.Main;
 using PatchKit.Patcher.AppData.Remote;
 using PatchKit.Patcher.AppUpdater.Commands;
+using PatchKit.Patcher.Cancellation;
 using PatchKit.Patcher.Unity.UI.Dialogs;
-using PatchKit.Unity.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Status;
 using UnityEngine;
 

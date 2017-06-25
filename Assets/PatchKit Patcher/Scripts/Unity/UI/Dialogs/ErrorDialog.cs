@@ -1,5 +1,5 @@
-﻿using PatchKit.Unity.Patcher;
-using PatchKit.Unity.Patcher.Cancellation;
+﻿using PatchKit.Patcher.Cancellation;
+using PatchKit.Unity.Patcher;
 using PatchKit.Unity.Utilities;
 using UnityEngine.UI;
 

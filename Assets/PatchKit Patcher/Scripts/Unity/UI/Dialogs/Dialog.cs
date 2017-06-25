@@ -1,5 +1,5 @@
 using System.Threading;
-using PatchKit.Unity.Patcher.Cancellation;
+using PatchKit.Patcher.Cancellation;
 using UnityEngine;
 using PatchKit.Unity.Patcher.Debug;
 

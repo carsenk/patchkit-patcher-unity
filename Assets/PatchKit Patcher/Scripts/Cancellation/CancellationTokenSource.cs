@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PatchKit.Unity.Patcher.Cancellation
+namespace PatchKit.Patcher.Cancellation
 {
     public class CancellationTokenSource
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace PatchKit.Unity.Patcher.Cancellation
+namespace PatchKit.Patcher.Cancellation
 {
     public class CancellationTokenRegistration : IDisposable
     {

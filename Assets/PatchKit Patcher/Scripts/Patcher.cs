@@ -4,14 +4,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using PatchKit.Patcher.AppUpdater.Commands;
+using PatchKit.Patcher.Cancellation;
 using PatchKit.Patcher.Unity.UI.Dialogs;
-using PatchKit.Unity.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Status;
 using PatchKit.Unity.Utilities;
 using PatchKit.Unity.Patcher.Debug;
 using UniRx;
 using UnityEngine;
-using CancellationToken = PatchKit.Unity.Patcher.Cancellation.CancellationToken;
+using CancellationToken = PatchKit.Patcher.Cancellation.CancellationToken;
 
 namespace PatchKit.Unity.Patcher
 {

@@ -1,5 +1,5 @@
 ﻿using System;
-using PatchKit.Unity.Patcher.Cancellation;
+using PatchKit.Patcher.Cancellation;
 
 namespace PatchKit.Patcher.AppData.Remote.Downloaders
 {

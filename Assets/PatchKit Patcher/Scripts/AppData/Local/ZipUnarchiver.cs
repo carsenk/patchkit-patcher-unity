@@ -1,6 +1,6 @@
 ﻿using Ionic.Zip;
+using PatchKit.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Debug;
-using PatchKit.Unity.Patcher.Cancellation;
 
 namespace PatchKit.Patcher.AppData.Local
 {

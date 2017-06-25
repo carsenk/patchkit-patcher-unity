@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using PatchKit.Patcher.AppUpdater.Commands;
-using PatchKit.Unity.Patcher.Cancellation;
+using PatchKit.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Debug;
 
 namespace PatchKit.Patcher.AppUpdater
