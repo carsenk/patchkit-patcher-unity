@@ -1,4 +1,4 @@
-﻿namespace PatchKit.Unity.Patcher.AppUpdater
+﻿namespace PatchKit.Unity.Patcher
 {
     public class PatcherConfigurationReader
     {

@@ -1,7 +1,8 @@
-﻿using PatchKit.Unity.Patcher.Cancellation;
+﻿using PatchKit.Unity.Patcher;
+using PatchKit.Unity.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Debug;
 
-namespace PatchKit.Unity.Patcher.AppUpdater
+namespace PatchKit.Patcher.AppUpdater
 {
     public class AppUpdater
     {

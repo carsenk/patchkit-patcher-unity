@@ -1,7 +1,8 @@
-﻿using PatchKit.Unity.Patcher.Cancellation;
+﻿using PatchKit.Patcher.AppUpdater.Commands;
+using PatchKit.Unity.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Debug;
 
-namespace PatchKit.Unity.Patcher.AppUpdater
+namespace PatchKit.Patcher.AppUpdater
 {
     public class AppUpdaterContentStrategy : IAppUpdaterStrategy
     {
@@ -26,7 +27,7 @@ namespace PatchKit.Unity.Patcher.AppUpdater
 
             DebugLogger.Log("Updating with content strategy.");
 
-            var commandFactory = new Commands.AppUpdaterCommandFactory();
+            var commandFactory = new AppUpdaterCommandFactory();
 
             var latestVersionId = _context.App.GetLatestVersionId();
 

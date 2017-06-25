@@ -1,4 +1,4 @@
-﻿namespace PatchKit.Unity.Patcher.AppUpdater.Commands
+﻿namespace PatchKit.Patcher.AppUpdater.Commands
 {
     public class FileIntegrity
     {

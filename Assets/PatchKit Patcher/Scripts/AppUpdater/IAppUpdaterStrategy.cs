@@ -1,6 +1,6 @@
 ﻿using PatchKit.Unity.Patcher.Cancellation;
 
-namespace PatchKit.Unity.Patcher.AppUpdater
+namespace PatchKit.Patcher.AppUpdater
 {
     public interface IAppUpdaterStrategy
     {

@@ -2,7 +2,7 @@
 using PatchKit.Unity.Patcher.Debug;
 using PatchKit.Unity.Patcher.Status;
 
-namespace PatchKit.Unity.Patcher.AppUpdater.Commands
+namespace PatchKit.Patcher.AppUpdater.Commands
 {
     public abstract class BaseAppUpdaterCommand : IAppUpdaterCommand
     {

@@ -6,7 +6,7 @@ using PatchKit.Unity.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Debug;
 using PatchKit.Unity.Patcher.Status;
 
-namespace PatchKit.Unity.Patcher.AppUpdater.Commands
+namespace PatchKit.Patcher.AppUpdater.Commands
 {
     /*
      * TODO: Content installation is not registering directories because they are not listed in content summary.

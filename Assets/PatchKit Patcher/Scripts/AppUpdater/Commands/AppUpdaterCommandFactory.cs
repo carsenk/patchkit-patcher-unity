@@ -3,7 +3,7 @@ using PatchKit.Api.Models.Main;
 using PatchKit.Patcher.AppData;
 using PatchKit.Patcher.Unity;
 
-namespace PatchKit.Unity.Patcher.AppUpdater.Commands
+namespace PatchKit.Patcher.AppUpdater.Commands
 {
     public class AppUpdaterCommandFactory
     {

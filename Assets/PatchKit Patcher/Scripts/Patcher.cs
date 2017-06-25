@@ -3,9 +3,8 @@ using System.Collections;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using PatchKit.Patcher.AppUpdater.Commands;
 using PatchKit.Patcher.Unity.UI.Dialogs;
-using PatchKit.Unity.Patcher.AppUpdater;
-using PatchKit.Unity.Patcher.AppUpdater.Commands;
 using PatchKit.Unity.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Status;
 using PatchKit.Unity.Utilities;
@@ -639,7 +638,7 @@ namespace PatchKit.Unity.Patcher
 
             using (cancellationToken.Register(() => _updateAppCancellationTokenSource.Cancel()))
             {
-                var appUpdater = new AppUpdater.AppUpdater(_app, _configuration.AppUpdaterConfiguration);
+                var appUpdater = new PatchKit.Patcher.AppUpdater.AppUpdater(_app, _configuration.AppUpdaterConfiguration);
 
                 appUpdater.Context.StatusMonitor.OverallStatusChanged += OnUpdateAppStatusChanged;
 

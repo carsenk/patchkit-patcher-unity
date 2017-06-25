@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PatchKit.Unity.Patcher.AppUpdater
+namespace PatchKit.Patcher.AppUpdater
 {
     [Serializable]
     public struct AppUpdaterConfiguration

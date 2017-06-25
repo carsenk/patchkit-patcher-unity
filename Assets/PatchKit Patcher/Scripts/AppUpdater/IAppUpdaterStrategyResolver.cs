@@ -1,4 +1,4 @@
-﻿namespace PatchKit.Unity.Patcher.AppUpdater
+﻿namespace PatchKit.Patcher.AppUpdater
 {
     public interface IAppUpdaterStrategyResolver
     {

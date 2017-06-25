@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using NSubstitute;
 using NUnit.Framework;
-using PatchKit.Unity.Patcher.AppUpdater.Commands;
 
 class InstallContentCommandTest
 {
