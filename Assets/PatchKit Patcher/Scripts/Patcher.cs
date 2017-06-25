@@ -7,6 +7,7 @@ using PatchKit.Patcher.AppUpdater.Commands;
 using PatchKit.Patcher.Cancellation;
 using PatchKit.Patcher.Debug;
 using PatchKit.Patcher.Status;
+using PatchKit.Patcher.Unity;
 using PatchKit.Patcher.Unity.UI.Dialogs;
 using PatchKit.Patcher.Utilities;
 using UniRx;

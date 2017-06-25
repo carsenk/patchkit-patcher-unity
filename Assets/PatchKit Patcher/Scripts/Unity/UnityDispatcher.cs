@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace PatchKit.Patcher.Utilities
+namespace PatchKit.Patcher.Unity
 {
     [AddComponentMenu("")]
     public class UnityDispatcher : MonoBehaviour

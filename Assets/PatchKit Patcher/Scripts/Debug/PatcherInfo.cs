@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using PatchKit.Patcher.Unity;
 using PatchKit.Patcher.Utilities;
 using UnityEngine;
 
