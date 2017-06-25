@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using PatchKit.Api.Models.Main;
+using PatchKit.Patcher.Unity;
 using PatchKit.Unity.Patcher.AppData;
 using PatchKit.Unity.Patcher.AppData.Local;
 

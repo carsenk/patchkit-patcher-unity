@@ -1,7 +1,8 @@
-﻿using PatchKit.Unity.Utilities;
+﻿using PatchKit.Unity.Patcher.AppData.Local;
+using PatchKit.Unity.Utilities;
 using UnityEngine;
 
-namespace PatchKit.Unity.Patcher.AppData.Local
+namespace PatchKit.Patcher.Unity
 {
     class UnityCache : ICache
     {
