@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using PatchKit.Unity.Patcher.AppData;
+using PatchKit.Unity.Patcher.AppData.Remote.Downloaders;
 using PatchKit.Unity.Utilities;
 using UnityEngine;
 
-namespace PatchKit.Unity.Patcher.AppData.Remote.Downloaders
+namespace PatchKit.Patcher.Unity
 {
     public class UnityTorrentClientProcessStartInfoProvider : ITorrentClientProcessStartInfoProvider
     {

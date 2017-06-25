@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Threading;
 using Newtonsoft.Json.Linq;
+using PatchKit.Patcher.Unity;
 using PatchKit.Unity.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Debug;
 using PatchKit.Unity.Utilities;
