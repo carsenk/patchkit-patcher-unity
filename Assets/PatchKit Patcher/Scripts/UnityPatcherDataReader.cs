@@ -4,19 +4,20 @@ using System.IO;
 using System.Linq;
 using PatchKit.Patcher.Debug;
 using PatchKit.Patcher.Utilities;
+using PatchKit.Unity.Patcher;
 using UnityEngine;
 
-namespace PatchKit.Unity.Patcher
+namespace PatchKit.Patcher.Unity
 {
-    public class InputArgumentsPatcherDataReader
+    public class UnityPatcherDataReader : IPatcherDataReader
     {
         private const string ForceSecretEnvironmentVariable = "PK_PATCHER_FORCE_SECRET";
         private const string ForceVersionEnvironmentVariable = "PK_PATCHER_FORCE_VERSION";
 
-        private static readonly DebugLogger DebugLogger = new DebugLogger(typeof(InputArgumentsPatcherDataReader));
-        private static readonly List<string> _commandLineArgs = Environment.GetCommandLineArgs().ToList();
+        private static readonly DebugLogger DebugLogger = new DebugLogger(typeof(UnityPatcherDataReader));
+        private static readonly List<string> CommandLineArgs = Environment.GetCommandLineArgs().ToList();
 
-        public InputArgumentsPatcherDataReader()
+        public UnityPatcherDataReader()
         {
             DebugLogger.LogConstructor();
         }
@@ -87,11 +88,11 @@ namespace PatchKit.Unity.Patcher
 
         private static bool TryReadArgument(string argumentName, out string value)
         {
-            int index = _commandLineArgs.IndexOf(argumentName);
+            int index = CommandLineArgs.IndexOf(argumentName);
 
-            if (index != -1 && index < _commandLineArgs.Count - 1)
+            if (index != -1 && index < CommandLineArgs.Count - 1)
             {
-                value = _commandLineArgs[index + 1];
+                value = CommandLineArgs[index + 1];
 
                 return true;
             }
@@ -108,7 +109,7 @@ namespace PatchKit.Unity.Patcher
 
         private static bool HasArgument(string argumentName)
         {
-            return _commandLineArgs.Contains(argumentName);
+            return CommandLineArgs.Contains(argumentName);
         }
 
         private static bool TryReadEnvironmentVariable(string argumentName, out string value)
