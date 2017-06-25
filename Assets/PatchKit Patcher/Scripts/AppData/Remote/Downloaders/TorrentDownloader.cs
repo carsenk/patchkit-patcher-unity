@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 using PatchKit.Patcher.Cancellation;
 using PatchKit.Patcher.Debug;
 using PatchKit.Patcher.Unity;
-using PatchKit.Unity.Utilities;
+using PatchKit.Patcher.Utilities;
 using UnityEngine;
 
 namespace PatchKit.Patcher.AppData.Remote.Downloaders

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using PatchKit.Patcher.AppData;
-using PatchKit.Unity.Utilities;
+using PatchKit.Patcher.Utilities;
 
 namespace PatchKit.Unity.Patcher
 {

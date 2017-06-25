@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-namespace PatchKit.Unity.Utilities
+namespace PatchKit.Patcher.Utilities
 {
     public class Platform
     {

@@ -1,5 +1,5 @@
 ﻿using PatchKit.Patcher.AppData.Local;
-using PatchKit.Unity.Utilities;
+using PatchKit.Patcher.Utilities;
 using UnityEngine;
 
 namespace PatchKit.Patcher.Unity

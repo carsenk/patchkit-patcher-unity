@@ -2,7 +2,6 @@
 using PatchKit.Api.Models.Main;
 using PatchKit.Patcher.Debug;
 using PatchKit.Unity;
-using PatchKit.Unity.Utilities;
 using UnityEngine;
 
 namespace PatchKit.Patcher.AppData.Remote

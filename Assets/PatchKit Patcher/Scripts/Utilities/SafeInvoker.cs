@@ -1,7 +1,7 @@
 ﻿using System;
 using PatchKit.Patcher.Debug;
 
-namespace PatchKit.Unity.Utilities
+namespace PatchKit.Patcher.Utilities
 {
     public static class SafeInvoker
     {

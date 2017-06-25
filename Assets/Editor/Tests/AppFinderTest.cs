@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using NSubstitute;
 using NUnit.Framework;
+using PatchKit.Patcher.Utilities;
 using PatchKit.Unity.Patcher;
-using PatchKit.Unity.Utilities;
 using UnityEngine;
 
 public class AppFinderTest

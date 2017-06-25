@@ -1,6 +1,6 @@
 ﻿using PatchKit.Patcher.Cancellation;
+using PatchKit.Patcher.Utilities;
 using PatchKit.Unity.Patcher;
-using PatchKit.Unity.Utilities;
 using UnityEngine.UI;
 
 namespace PatchKit.Patcher.Unity.UI.Dialogs

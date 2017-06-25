@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace PatchKit.Unity.Utilities
+namespace PatchKit.Patcher.Utilities
 {
     [AddComponentMenu("")]
     public class UnityDispatcher : MonoBehaviour
@@ -81,7 +81,7 @@ namespace PatchKit.Unity.Utilities
             }
             catch (Exception exception)
             {
-                Debug.LogException(exception);
+                UnityEngine.Debug.LogException(exception);
             }
             finally
             {
@@ -107,7 +107,7 @@ namespace PatchKit.Unity.Utilities
                 }
                 catch (Exception exception)
                 {
-                    Debug.LogException(exception);
+                    UnityEngine.Debug.LogException(exception);
                 }
 
                 yield return coroutine.Current;

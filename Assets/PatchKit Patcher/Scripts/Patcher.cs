@@ -8,7 +8,7 @@ using PatchKit.Patcher.Cancellation;
 using PatchKit.Patcher.Debug;
 using PatchKit.Patcher.Status;
 using PatchKit.Patcher.Unity.UI.Dialogs;
-using PatchKit.Unity.Utilities;
+using PatchKit.Patcher.Utilities;
 using UniRx;
 using UnityEngine;
 using CancellationToken = PatchKit.Patcher.Cancellation.CancellationToken;

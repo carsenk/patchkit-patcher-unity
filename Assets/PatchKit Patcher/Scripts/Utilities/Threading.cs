@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Threading;
-using UnityEngine;
 
-namespace PatchKit.Unity.Utilities
+namespace PatchKit.Patcher.Utilities
 {
     public static class Threading
     {
@@ -50,7 +49,7 @@ namespace PatchKit.Unity.Utilities
                 {
                     if (onFailed == null)
                     {
-                        Debug.LogException(exception);
+                        UnityEngine.Debug.LogException(exception);
                     }
                     else
                     {

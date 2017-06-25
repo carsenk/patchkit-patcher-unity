@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace PatchKit.Unity.Utilities
+namespace PatchKit.Patcher.Utilities
 {
     public class Streams
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Linq;
 using PatchKit.Api.Models.Main;
-using PatchKit.Unity.Utilities;
+using PatchKit.Patcher.Utilities;
 
 namespace PatchKit.Patcher.Unity.UI.Changelog
 {

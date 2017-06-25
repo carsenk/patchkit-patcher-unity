@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using PatchKit.Unity.Utilities;
+using PatchKit.Patcher.Utilities;
 using UnityEngine.UI;
 
 namespace PatchKit.Patcher.Unity.UI

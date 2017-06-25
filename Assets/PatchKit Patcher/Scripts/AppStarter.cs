@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using PatchKit.Patcher.AppData;
 using PatchKit.Patcher.Debug;
-using PatchKit.Unity.Utilities;
+using PatchKit.Patcher.Utilities;
 
 namespace PatchKit.Unity.Patcher
 {

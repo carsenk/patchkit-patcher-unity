@@ -1,6 +1,6 @@
 ﻿using System;
 using PatchKit.Patcher.Cancellation;
-using PatchKit.Unity.Utilities;
+using PatchKit.Patcher.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Linq;
 using PatchKit.Api.Utilities;
-using PatchKit.Unity.Utilities;
+using PatchKit.Patcher.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 

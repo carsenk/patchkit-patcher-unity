@@ -5,7 +5,7 @@ using System.Text;
 using Ionic.Zlib;
 using PatchKit.Patcher.Cancellation;
 using PatchKit.Patcher.Debug;
-using PatchKit.Unity.Utilities;
+using PatchKit.Patcher.Utilities;
 using CompressionMode = System.IO.Compression.CompressionMode;
 
 namespace PatchKit.Patcher.AppData.Local

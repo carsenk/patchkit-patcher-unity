@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using PatchKit.Patcher.Debug;
 
-namespace PatchKit.Unity.Utilities
+namespace PatchKit.Patcher.Utilities
 {
 
 public class Chmod

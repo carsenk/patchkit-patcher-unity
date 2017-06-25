@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using PatchKit.Unity.Utilities;
+using PatchKit.Patcher.Utilities;
 using UnityEngine;
 
 namespace PatchKit.Patcher.Debug
