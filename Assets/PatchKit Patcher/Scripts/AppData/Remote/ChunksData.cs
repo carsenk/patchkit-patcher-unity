@@ -1,4 +1,6 @@
-﻿namespace PatchKit.Unity.Patcher.AppData.Remote
+﻿using PatchKit.Patcher.AppData.Remote.Downloaders;
+
+namespace PatchKit.Patcher.AppData.Remote
 {
     public struct ChunksData
     {

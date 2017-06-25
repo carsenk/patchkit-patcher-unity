@@ -1,4 +1,4 @@
-﻿using PatchKit.Unity.Patcher.AppData.Remote;
+﻿using PatchKit.Patcher.AppData.Remote;
 using PatchKit.Unity.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Debug;
 using PatchKit.Unity.Patcher.Status;

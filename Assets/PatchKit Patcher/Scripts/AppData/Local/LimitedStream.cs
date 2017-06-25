@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace PatchKit.Unity.Patcher.AppData.Local
+namespace PatchKit.Patcher.AppData.Local
 {
     /// <summary>
     /// Limits the stream to given size in bytes.

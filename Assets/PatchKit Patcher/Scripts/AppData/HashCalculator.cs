@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace PatchKit.Unity.Patcher.AppData
+namespace PatchKit.Patcher.AppData
 {
     public static class HashCalculator
     {

@@ -2,7 +2,7 @@
 using PatchKit.Unity.Patcher.Debug;
 using PatchKit.Unity.Patcher.Cancellation;
 
-namespace PatchKit.Unity.Patcher.AppData.Local
+namespace PatchKit.Patcher.AppData.Local
 {
     /// <summary>
     /// The unarchiver.

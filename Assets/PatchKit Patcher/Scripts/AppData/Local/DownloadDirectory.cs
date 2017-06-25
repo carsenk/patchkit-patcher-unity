@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using PatchKit.Unity.Patcher.Debug;
 
-namespace PatchKit.Unity.Patcher.AppData.Local
+namespace PatchKit.Patcher.AppData.Local
 {
     /// <summary>
     /// Implementation of <see cref="IDownloadDirectory"/>.

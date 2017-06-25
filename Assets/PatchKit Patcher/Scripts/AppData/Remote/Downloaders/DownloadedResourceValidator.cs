@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace PatchKit.Unity.Patcher.AppData.Remote.Downloaders
+namespace PatchKit.Patcher.AppData.Remote.Downloaders
 {
     public class DownloadedResourceValidator
     {

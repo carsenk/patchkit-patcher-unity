@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
 using PatchKit.Api;
+using PatchKit.Patcher.AppData.Remote.Downloaders;
+using PatchKit.Unity;
 using PatchKit.Unity.Patcher.Debug;
 
-namespace PatchKit.Unity.Patcher.AppData.Remote
+namespace PatchKit.Patcher.AppData.Remote
 {
     public class RemoteData : IRemoteData
     {

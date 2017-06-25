@@ -4,7 +4,7 @@
  */
 
 using System.IO;
-using PatchKit.Unity.Patcher.AppData.Local;
+using PatchKit.Patcher.AppData.Local;
 using UnityEditor;
 using UnityEngine;
 

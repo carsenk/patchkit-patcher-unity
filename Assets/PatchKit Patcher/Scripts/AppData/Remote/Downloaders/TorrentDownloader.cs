@@ -10,7 +10,7 @@ using PatchKit.Unity.Patcher.Debug;
 using PatchKit.Unity.Utilities;
 using UnityEngine;
 
-namespace PatchKit.Unity.Patcher.AppData.Remote.Downloaders
+namespace PatchKit.Patcher.AppData.Remote.Downloaders
 {
     /// <summary>
     /// Downloads file through torrents by using <see cref="TorrentClient"/>.

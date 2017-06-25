@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
-using PatchKit.Unity.Patcher.AppData.Remote.Downloaders;
+using PatchKit.Patcher.AppData.Remote.Downloaders;
 using PatchKit.Unity.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Debug;
 
-namespace PatchKit.Unity.Patcher.AppData.Remote
+namespace PatchKit.Patcher.AppData.Remote
 {
     public class RemoteResourceDownloader
     {

@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace PatchKit.Unity.Patcher.AppData
+namespace PatchKit.Patcher.AppData
 {
     public static class StringPathExtensions
     {

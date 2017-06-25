@@ -3,7 +3,7 @@ using System.Net;
 using PatchKit.Unity.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Debug;
 
-namespace PatchKit.Unity.Patcher.AppData.Remote.Downloaders
+namespace PatchKit.Patcher.AppData.Remote.Downloaders
 {
     public sealed class BaseHttpDownloader : IBaseHttpDownloader
     {

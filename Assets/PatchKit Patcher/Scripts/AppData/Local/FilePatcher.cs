@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using PatchKit.Unity.Patcher.Debug;
 
-namespace PatchKit.Unity.Patcher.AppData.Local
+namespace PatchKit.Patcher.AppData.Local
 {
     /// <summary>
     /// The file patcher.

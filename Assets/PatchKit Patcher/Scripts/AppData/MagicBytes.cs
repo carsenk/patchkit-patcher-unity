@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 
-namespace PatchKit.Unity.Patcher.Data
+namespace PatchKit.Patcher.AppData
 {
     public class MagicBytes
     {

@@ -5,7 +5,7 @@ using System.Text;
 using Newtonsoft.Json.Linq;
 using PatchKit.Unity.Patcher.Debug;
 
-namespace PatchKit.Unity.Patcher.AppData.Remote.Downloaders
+namespace PatchKit.Patcher.AppData.Remote.Downloaders
 {
     /// <summary>
     /// Provides an easy access for torrent client program.

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using PatchKit.Unity.Patcher.AppData;
-using PatchKit.Unity.Patcher.AppData.Local;
-using PatchKit.Unity.Patcher.AppData.Remote;
+using PatchKit.Patcher.AppData;
+using PatchKit.Patcher.AppData.Local;
+using PatchKit.Patcher.AppData.Remote;
 using PatchKit.Unity.Patcher.Debug;
 
 namespace PatchKit.Unity.Patcher

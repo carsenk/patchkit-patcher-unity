@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using PatchKit.Unity.Patcher.Debug;
 
-namespace PatchKit.Unity.Patcher.AppData.Local
+namespace PatchKit.Patcher.AppData.Local
 {
     /// <summary>
     /// Base class for all of the directory implementations.

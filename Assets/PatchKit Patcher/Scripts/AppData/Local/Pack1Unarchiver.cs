@@ -4,12 +4,11 @@ using System.Security.Cryptography;
 using System.Text;
 using Ionic.Zlib;
 using PatchKit.Unity.Patcher.Cancellation;
-using PatchKit.Unity.Patcher.Data;
 using PatchKit.Unity.Patcher.Debug;
 using PatchKit.Unity.Utilities;
 using CompressionMode = System.IO.Compression.CompressionMode;
 
-namespace PatchKit.Unity.Patcher.AppData.Local
+namespace PatchKit.Patcher.AppData.Local
 {
 
     /// <summary>

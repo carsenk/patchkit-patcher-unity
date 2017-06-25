@@ -2,7 +2,7 @@
 using System.IO;
 using PatchKit.Unity.Patcher.Debug;
 
-namespace PatchKit.Unity.Patcher.AppData
+namespace PatchKit.Patcher.AppData
 {
     // ReSharper disable once InconsistentNaming
     public static class FileOperations

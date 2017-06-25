@@ -1,5 +1,5 @@
 ﻿using PatchKit.Api.Models.Main;
-using PatchKit.Unity.Patcher.AppData.Remote;
+using PatchKit.Patcher.AppData.Remote;
 
 namespace PatchKit.Unity.Patcher.Status
 {

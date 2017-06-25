@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace PatchKit.Unity.Patcher.AppData.Remote
+namespace PatchKit.Patcher.AppData.Remote
 {
     public class RemoteResourcePasswordGenerator
     {

@@ -1,6 +1,6 @@
 ﻿using PatchKit.Api.Models.Main;
 
-namespace PatchKit.Unity.Patcher.AppData.Remote
+namespace PatchKit.Patcher.AppData.Remote
 {
     public interface IRemoteMetaData
     {

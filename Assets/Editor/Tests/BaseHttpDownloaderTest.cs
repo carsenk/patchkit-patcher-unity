@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using NUnit.Framework;
 using NSubstitute;
-using PatchKit.Unity.Patcher.AppData.Remote.Downloaders;
+using PatchKit.Patcher.AppData.Remote.Downloaders;
 using PatchKit.Unity.Patcher.Cancellation;
 
 public class BaseHttpDownloaderTest

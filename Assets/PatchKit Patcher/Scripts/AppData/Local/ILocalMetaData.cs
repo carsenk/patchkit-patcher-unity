@@ -1,4 +1,4 @@
-﻿namespace PatchKit.Unity.Patcher.AppData.Local
+﻿namespace PatchKit.Patcher.AppData.Local
 {
     /// <summary>
     /// Meta information about local applciation data.

@@ -5,7 +5,7 @@ using System.Threading;
 using PatchKit.Unity.Patcher.Debug;
 using CancellationToken = PatchKit.Unity.Patcher.Cancellation.CancellationToken;
 
-namespace PatchKit.Unity.Patcher.AppData.Remote.Downloaders
+namespace PatchKit.Patcher.AppData.Remote.Downloaders
 {
     /// <summary>
     /// Downloads chunk-hashed file through HTTP.

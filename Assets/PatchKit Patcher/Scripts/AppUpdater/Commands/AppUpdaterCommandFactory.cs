@@ -1,8 +1,7 @@
 ﻿using System.IO;
 using PatchKit.Api.Models.Main;
+using PatchKit.Patcher.AppData;
 using PatchKit.Patcher.Unity;
-using PatchKit.Unity.Patcher.AppData;
-using PatchKit.Unity.Patcher.AppData.Local;
 
 namespace PatchKit.Unity.Patcher.AppUpdater.Commands
 {

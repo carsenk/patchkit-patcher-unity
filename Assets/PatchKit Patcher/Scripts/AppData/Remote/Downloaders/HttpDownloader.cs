@@ -5,7 +5,7 @@ using System.Threading;
 using PatchKit.Unity.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Debug;
 
-namespace PatchKit.Unity.Patcher.AppData.Remote.Downloaders
+namespace PatchKit.Patcher.AppData.Remote.Downloaders
 {
     /// <summary>
     /// Downloads file through HTTP without any validation (such as hash checking).

@@ -1,6 +1,6 @@
 ﻿using PatchKit.Unity.Patcher.Cancellation;
 
-namespace PatchKit.Unity.Patcher.AppData.Remote.Downloaders
+namespace PatchKit.Patcher.AppData.Remote.Downloaders
 {
     /// <summary>
     /// Base HTTP downloader.

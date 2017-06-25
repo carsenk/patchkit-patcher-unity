@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using PatchKit.Unity.Patcher.Debug;
 
-namespace PatchKit.Unity.Patcher.AppData.Remote.Downloaders
+namespace PatchKit.Patcher.AppData.Remote.Downloaders
 {
     /// <summary>
     /// Helps to save a file making a hash-checking of its chunks during the save process.

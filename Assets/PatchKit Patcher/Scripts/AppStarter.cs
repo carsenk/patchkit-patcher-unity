@@ -1,8 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using PatchKit.Unity.Patcher.AppData;
-using PatchKit.Unity.Patcher.Data;
+using PatchKit.Patcher.AppData;
 using PatchKit.Unity.Patcher.Debug;
 using PatchKit.Unity.Utilities;
 

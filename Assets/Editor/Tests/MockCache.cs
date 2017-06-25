@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using PatchKit.Unity.Patcher.AppData.Local;
+using PatchKit.Patcher.AppData.Local;
 
 class MockCache : ICache
 {
