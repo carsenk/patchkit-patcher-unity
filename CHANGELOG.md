@@ -4,6 +4,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Fixed
+- HTTP downloader resumes the download on error
+
+## [3.1.3]
+### Added
+- Add miliseconds information to log date and time
+- Add KNOWNBUGS.md
+
+### Removed
+- Remove stack trace information from logs sent to server
+
+### Changed
+- Improved overall stability
+- API Cache servers urls
+
+### Fixed
+- Fix problem with resource validation
+- Fix problems with overwritting files by downloader and unarchiver
+- Fix situation when user was asked for license key once again
+- Fix sending patcher logs to server
+- Fix problem with shared access violation when downloading torrents
+
+## [3.1.2]
+### Fixed
+- Fix situation when user was asked for license key once again
+
+### Changed
+- Add miliseconds information to log date and time
+- Improved overall stability
+
 ## [3.1.1]
 ### Fixed
 - torrent-client.exe required MSVCP140.dll to work correctly
