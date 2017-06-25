@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using NSubstitute;
 using NUnit.Framework;
 using PatchKit.Api.Models.Main;
+using PatchKit.Patcher.Unity.UI.Dialogs;
 using PatchKit.Unity.Patcher.AppData.Local;
 using PatchKit.Unity.Patcher.AppData.Remote;
 using PatchKit.Unity.Patcher.AppUpdater.Commands;
 using PatchKit.Unity.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Status;
-using PatchKit.Unity.Patcher.UI.Dialogs;
 using UnityEngine;
 
 class ValidateLicenseCommandTest

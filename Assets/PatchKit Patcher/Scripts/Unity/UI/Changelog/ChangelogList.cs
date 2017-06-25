@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Linq;
 using PatchKit.Api.Models.Main;
-using PatchKit.Unity.UI;
 using PatchKit.Unity.Utilities;
 
-namespace PatchKit.Unity.Patcher.UI
+namespace PatchKit.Patcher.Unity.UI.Changelog
 {
     public class ChangelogList : UIApiComponent
     {
@@ -14,13 +13,13 @@ namespace PatchKit.Unity.Patcher.UI
 
         protected override IEnumerator LoadCoroutine()
         {
-            while (!Patcher.Instance.Data.HasValue || Patcher.Instance.Data.Value.AppSecret == null)
+            while (!PatchKit.Unity.Patcher.Patcher.Instance.Data.HasValue || PatchKit.Unity.Patcher.Patcher.Instance.Data.Value.AppSecret == null)
             {
                 yield return null;
             }
 
             yield return
-                Threading.StartThreadCoroutine(() => MainApiConnection.GetAppVersionList(Patcher.Instance.Data.Value.AppSecret),
+                Threading.StartThreadCoroutine(() => MainApiConnection.GetAppVersionList(PatchKit.Unity.Patcher.Patcher.Instance.Data.Value.AppSecret),
                     response =>
                     {
                         foreach (var version in response.OrderByDescending(version => version.Id))

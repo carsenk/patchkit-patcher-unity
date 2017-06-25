@@ -1,6 +1,6 @@
-﻿using PatchKit.Unity.Patcher.Debug;
+﻿using PatchKit.Patcher.Unity.UI.Dialogs;
+using PatchKit.Unity.Patcher.Debug;
 using PatchKit.Unity.Patcher.Status;
-using PatchKit.Unity.Patcher.UI.Dialogs;
 
 namespace PatchKit.Unity.Patcher.AppUpdater
 {
@@ -15,7 +15,7 @@ namespace PatchKit.Unity.Patcher.AppUpdater
         public readonly ILicenseDialog LicenseDialog;
 
         public AppUpdaterContext(App app, AppUpdaterConfiguration configuration) :
-            this(app, configuration, new StatusMonitor(), UI.Dialogs.LicenseDialog.Instance)
+            this(app, configuration, new StatusMonitor(), PatchKit.Patcher.Unity.UI.Dialogs.LicenseDialog.Instance)
         {
         }
 

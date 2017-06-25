@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PatchKit.Unity.Patcher.UI
+namespace PatchKit.Patcher.Unity.UI.Changelog
 {
     [RequireComponent(typeof(Animator))]
     public class ChangelogPanel : MonoBehaviour

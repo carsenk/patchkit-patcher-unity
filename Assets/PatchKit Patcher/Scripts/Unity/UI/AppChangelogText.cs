@@ -5,7 +5,7 @@ using PatchKit.Unity.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PatchKit.Unity.UI
+namespace PatchKit.Patcher.Unity.UI
 {
     public class AppChangelogText : AppCompontent
     {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace PatchKit.Unity.Patcher.UI
+namespace PatchKit.Patcher.Unity.UI
 {
     public class DownloadSpeed : MonoBehaviour
     {
@@ -9,7 +9,7 @@ namespace PatchKit.Unity.Patcher.UI
 
         private void Start()
         {
-            Patcher.Instance.UpdateAppStatusChanged += status =>
+            PatchKit.Unity.Patcher.Patcher.Instance.UpdateAppStatusChanged += status =>
             {
                 Text.text = status.IsDownloading ? (status.DownloadBytesPerSecond / 1024.0).ToString("0.0 kB/sec.") : string.Empty;
             };

@@ -1,4 +1,4 @@
-﻿namespace PatchKit.Unity.Patcher.UI.Dialogs
+﻿namespace PatchKit.Patcher.Unity.UI.Dialogs
 {
     public interface ILicenseDialog
     {

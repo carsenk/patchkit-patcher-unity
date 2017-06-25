@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using PatchKit.Unity.Patcher;
+using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 
-namespace PatchKit.Unity.Patcher.UI
+namespace PatchKit.Patcher.Unity.UI
 {
     public class DownloadStatus : MonoBehaviour
     {
@@ -10,7 +11,7 @@ namespace PatchKit.Unity.Patcher.UI
 
         private void Start()
         {
-            Patcher.Instance.State.ObserveOnMainThread().Subscribe(state =>
+            PatchKit.Unity.Patcher.Patcher.Instance.State.ObserveOnMainThread().Subscribe(state =>
             {
                 if (state != PatcherState.UpdatingApp)
                 {
@@ -18,7 +19,7 @@ namespace PatchKit.Unity.Patcher.UI
                 }
             }).AddTo(this);
 
-            Patcher.Instance.UpdateAppStatusChanged += status =>
+            PatchKit.Unity.Patcher.Patcher.Instance.UpdateAppStatusChanged += status =>
             {
                 if(status.IsDownloading)
                 {

@@ -1,8 +1,9 @@
-﻿using PatchKit.Unity.Patcher.Cancellation;
+﻿using PatchKit.Unity.Patcher;
+using PatchKit.Unity.Patcher.Cancellation;
 using PatchKit.Unity.Utilities;
 using UnityEngine.UI;
 
-namespace PatchKit.Unity.Patcher.UI.Dialogs
+namespace PatchKit.Patcher.Unity.UI.Dialogs
 {
     public class ErrorDialog : Dialog<ErrorDialog>
     {

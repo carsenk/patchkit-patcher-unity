@@ -1,4 +1,4 @@
-﻿namespace PatchKit.Unity.UI
+﻿namespace PatchKit.Patcher.Unity.UI
 {
     public abstract class AppCompontent : UIApiComponent
     {

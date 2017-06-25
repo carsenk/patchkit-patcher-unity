@@ -1,9 +1,10 @@
 ﻿using System;
+using PatchKit.Unity.Patcher;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PatchKit.Unity.Patcher.UI
+namespace PatchKit.Patcher.Unity.UI
 {
     public class Status : MonoBehaviour
     {
@@ -11,7 +12,7 @@ namespace PatchKit.Unity.Patcher.UI
 
         private void Start()
         {
-            Patcher.Instance.State.ObserveOnMainThread().Subscribe(state =>
+            PatchKit.Unity.Patcher.Patcher.Instance.State.ObserveOnMainThread().Subscribe(state =>
             {
                 switch (state)
                 {

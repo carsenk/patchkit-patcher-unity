@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using PatchKit.Api;
+using PatchKit.Unity;
 using UnityEngine;
 
-namespace PatchKit.Unity.UI
+namespace PatchKit.Patcher.Unity.UI
 {
     public abstract class UIApiComponent : MonoBehaviour
     {

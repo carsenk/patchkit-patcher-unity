@@ -4,7 +4,7 @@ using PatchKit.Unity.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PatchKit.Unity.Patcher.UI.Dialogs
+namespace PatchKit.Patcher.Unity.UI.Dialogs
 {
     public class LicenseDialog : Dialog<LicenseDialog>, ILicenseDialog
     {

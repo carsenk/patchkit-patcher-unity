@@ -3,7 +3,7 @@ using PatchKit.Unity.Patcher.Cancellation;
 using UnityEngine;
 using PatchKit.Unity.Patcher.Debug;
 
-namespace PatchKit.Unity.Patcher.UI.Dialogs
+namespace PatchKit.Patcher.Unity.UI.Dialogs
 {
     public class Dialog<T> : MonoBehaviour where T : Dialog<T>
     {

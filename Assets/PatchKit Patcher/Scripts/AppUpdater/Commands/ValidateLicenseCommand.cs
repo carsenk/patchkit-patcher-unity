@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Net;
 using PatchKit.Api;
+using PatchKit.Patcher.Unity.UI.Dialogs;
 using PatchKit.Unity.Patcher.AppData.Local;
 using PatchKit.Unity.Patcher.AppData.Remote;
 using PatchKit.Unity.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Debug;
 using PatchKit.Unity.Patcher.Status;
-using PatchKit.Unity.Patcher.UI.Dialogs;
 
 namespace PatchKit.Unity.Patcher.AppUpdater.Commands
 {
