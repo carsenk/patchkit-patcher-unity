@@ -5,7 +5,7 @@ using PatchKit.Patcher.AppData;
 using PatchKit.Patcher.Debug;
 using PatchKit.Patcher.Utilities;
 
-namespace PatchKit.Unity.Patcher
+namespace PatchKit.Patcher
 {
     public class AppStarter
     {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using PatchKit.Patcher;
 using PatchKit.Patcher.AppUpdater.Commands;
 using PatchKit.Patcher.Cancellation;
 using PatchKit.Patcher.Debug;

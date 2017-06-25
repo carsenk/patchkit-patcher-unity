@@ -6,7 +6,7 @@ using PatchKit.Patcher.AppData.Local;
 using PatchKit.Patcher.AppData.Remote;
 using PatchKit.Patcher.Debug;
 
-namespace PatchKit.Unity.Patcher
+namespace PatchKit.Patcher
 {
     public class App : IDisposable
     {

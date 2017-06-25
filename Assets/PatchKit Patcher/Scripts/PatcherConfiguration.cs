@@ -1,7 +1,7 @@
 ﻿using System;
 using PatchKit.Patcher.AppUpdater;
 
-namespace PatchKit.Unity.Patcher
+namespace PatchKit.Patcher
 {
     [Serializable]
     public struct PatcherConfiguration

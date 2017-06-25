@@ -4,7 +4,7 @@ using System.Linq;
 using PatchKit.Patcher.AppData;
 using PatchKit.Patcher.Utilities;
 
-namespace PatchKit.Unity.Patcher
+namespace PatchKit.Patcher
 {
     public class AppFinder
     {
