@@ -19,7 +19,7 @@ namespace PatchKit.Patcher.Unity.UI.Changelog
             }
 
             yield return
-                Threading.StartThreadCoroutine(() => MainApiConnection.GetAppVersionList(PatchKit.Unity.Patcher.Patcher.Instance.Data.Value.AppSecret),
+                UnityThreading.StartThreadCoroutine(() => MainApiConnection.GetAppVersionList(PatchKit.Unity.Patcher.Patcher.Instance.Data.Value.AppSecret),
                     response =>
                     {
                         foreach (var version in response.OrderByDescending(version => version.Id))

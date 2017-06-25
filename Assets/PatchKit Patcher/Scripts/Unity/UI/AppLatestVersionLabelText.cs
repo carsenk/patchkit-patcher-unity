@@ -10,7 +10,7 @@ namespace PatchKit.Patcher.Unity.UI
 
         protected override IEnumerator LoadCoroutine()
         {
-            yield return Threading.StartThreadCoroutine(() => MainApiConnection.GetAppLatestAppVersion(AppSecret),
+            yield return UnityThreading.StartThreadCoroutine(() => MainApiConnection.GetAppLatestAppVersion(AppSecret),
                 response =>
                 {
                     Text.text = response.Label;

@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Threading;
 
-namespace PatchKit.Patcher.Utilities
+namespace PatchKit.Patcher.Unity
 {
-    public static class Threading
+    public static class UnityThreading
     {
         /// <summary>
         /// Starts the thread with specified action in coroutine.
