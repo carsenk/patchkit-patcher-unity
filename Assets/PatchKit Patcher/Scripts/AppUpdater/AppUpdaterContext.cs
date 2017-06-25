@@ -1,7 +1,7 @@
 ﻿using PatchKit.Patcher.Debug;
+using PatchKit.Patcher.Status;
 using PatchKit.Patcher.Unity.UI.Dialogs;
 using PatchKit.Unity.Patcher;
-using PatchKit.Unity.Patcher.Status;
 
 namespace PatchKit.Patcher.AppUpdater
 {

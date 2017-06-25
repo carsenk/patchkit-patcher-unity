@@ -1,7 +1,7 @@
 ﻿using PatchKit.Api.Models.Main;
 using PatchKit.Patcher.AppData.Remote;
 
-namespace PatchKit.Unity.Patcher.Status
+namespace PatchKit.Patcher.Status
 {
     public static class StatusWeightHelper
     {

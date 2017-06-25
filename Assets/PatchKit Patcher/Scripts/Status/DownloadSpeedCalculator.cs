@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PatchKit.Unity.Patcher.Status
+namespace PatchKit.Patcher.Status
 {
     public class DownloadSpeedCalculator
     {

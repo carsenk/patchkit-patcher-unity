@@ -1,6 +1,6 @@
 ﻿using PatchKit.Patcher.Cancellation;
 using PatchKit.Patcher.Debug;
-using PatchKit.Unity.Patcher.Status;
+using PatchKit.Patcher.Status;
 
 namespace PatchKit.Patcher.AppUpdater.Commands
 {

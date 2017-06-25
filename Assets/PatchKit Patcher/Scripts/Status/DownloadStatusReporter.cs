@@ -1,7 +1,7 @@
 ﻿using System;
 using PatchKit.Patcher.Debug;
 
-namespace PatchKit.Unity.Patcher.Status
+namespace PatchKit.Patcher.Status
 {
     public class DownloadStatusReporter : IDownloadStatusReporter
     {

@@ -1,4 +1,4 @@
-﻿namespace PatchKit.Unity.Patcher.Status
+﻿namespace PatchKit.Patcher.Status
 {
     public class DownloadStatusHolder : IStatusHolder
     {
