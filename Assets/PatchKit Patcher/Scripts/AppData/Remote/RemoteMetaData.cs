@@ -1,6 +1,7 @@
 ﻿using PatchKit.Api;
 using PatchKit.Api.Models.Main;
 using PatchKit.Patcher.Debug;
+using PatchKit.Patcher.Unity;
 using PatchKit.Unity;
 using UnityEngine;
 
@@ -15,8 +16,8 @@ namespace PatchKit.Patcher.AppData.Remote
         private readonly KeysApiConnection _keysApiConnection;
 
         public RemoteMetaData(string appSecret) : this(appSecret, 
-            new MainApiConnection(Settings.GetMainApiConnectionSettings()),
-            new KeysApiConnection(Settings.GetKeysApiConnectionSettings()))
+            new MainApiConnection(UnitySettings.GetMainApiConnectionSettings()),
+            new KeysApiConnection(UnitySettings.GetKeysApiConnectionSettings()))
         {
         }
 

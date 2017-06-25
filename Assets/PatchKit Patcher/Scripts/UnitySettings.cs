@@ -2,9 +2,9 @@
 using PatchKit.Api;
 using UnityEngine;
 
-namespace PatchKit.Unity
+namespace PatchKit.Patcher.Unity
 {
-    public class Settings : ScriptableObject
+    public class UnitySettings : ScriptableObject
     {
         private const string AssetFileName = "PatchKit Settings";
 
@@ -13,7 +13,7 @@ namespace PatchKit.Unity
         [SerializeField] public ApiConnectionSettings KeysApiConnectionSettings;
 
 #if UNITY_EDITOR
-        private static Settings CreateSettingsInstance()
+        private static UnitySettings CreateSettingsInstance()
         {
             bool pingObject = false;
 
@@ -26,7 +26,7 @@ namespace PatchKit.Unity
                 pingObject = true;
             }
 
-            var settings = CreateInstance<Settings>();
+            var settings = CreateInstance<UnitySettings>();
             settings.MainApiConnectionSettings = MainApiConnection.GetDefaultSettings();
             settings.KeysApiConnectionSettings = KeysApiConnection.GetDefaultSettings();
 
@@ -46,9 +46,9 @@ namespace PatchKit.Unity
 #endif
 
         [CanBeNull]
-        public static Settings FindInstance()
+        public static UnitySettings FindInstance()
         {
-            var settings = Resources.Load<Settings>(AssetFileName);
+            var settings = Resources.Load<UnitySettings>(AssetFileName);
 
 #if UNITY_EDITOR
             if (settings == null)

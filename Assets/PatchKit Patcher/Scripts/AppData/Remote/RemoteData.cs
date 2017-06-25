@@ -3,6 +3,7 @@ using System.Linq;
 using PatchKit.Api;
 using PatchKit.Patcher.AppData.Remote.Downloaders;
 using PatchKit.Patcher.Debug;
+using PatchKit.Patcher.Unity;
 using PatchKit.Unity;
 
 namespace PatchKit.Patcher.AppData.Remote
@@ -15,7 +16,7 @@ namespace PatchKit.Patcher.AppData.Remote
         private readonly MainApiConnection _mainApiConnection;
 
         public RemoteData(string appSecret) : this(appSecret,
-            new MainApiConnection(Settings.GetMainApiConnectionSettings()))
+            new MainApiConnection(UnitySettings.GetMainApiConnectionSettings()))
         {
         }
 

@@ -47,7 +47,7 @@ namespace PatchKit.Patcher.Unity.UI
 
         protected virtual void Awake()
         {
-            _mainApiConnection = new MainApiConnection(Settings.GetMainApiConnectionSettings());
+            _mainApiConnection = new MainApiConnection(UnitySettings.GetMainApiConnectionSettings());
         }
 
         protected virtual void Start()
