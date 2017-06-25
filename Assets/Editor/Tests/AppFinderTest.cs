@@ -3,7 +3,6 @@ using NSubstitute;
 using NUnit.Framework;
 using PatchKit.Patcher;
 using PatchKit.Patcher.Utilities;
-using PatchKit.Unity.Patcher;
 using UnityEngine;
 
 public class AppFinderTest

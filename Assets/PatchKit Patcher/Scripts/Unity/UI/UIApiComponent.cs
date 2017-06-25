@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using PatchKit.Api;
-using PatchKit.Unity;
 using UnityEngine;
 
 namespace PatchKit.Patcher.Unity.UI

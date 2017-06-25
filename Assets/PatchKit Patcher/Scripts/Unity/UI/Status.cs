@@ -1,5 +1,4 @@
 ﻿using System;
-using PatchKit.Unity.Patcher;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,26 +11,26 @@ namespace PatchKit.Patcher.Unity.UI
 
         private void Start()
         {
-            PatchKit.Unity.Patcher.Patcher.Instance.State.ObserveOnMainThread().Subscribe(state =>
+            UnityPatcher.Instance.State.ObserveOnMainThread().Subscribe(state =>
             {
                 switch (state)
                 {
-                    case PatcherState.None:
+                    case UnityPatcherState.None:
                         Text.text = string.Empty;
                         break;
-                    case PatcherState.LoadingPatcherData:
+                    case UnityPatcherState.LoadingPatcherData:
                         Text.text = "Loading data...";
                         break;
-                    case PatcherState.LoadingPatcherConfiguration:
+                    case UnityPatcherState.LoadingPatcherConfiguration:
                         Text.text = "Loading configuration...";
                         break;
-                    case PatcherState.WaitingForUserDecision:
+                    case UnityPatcherState.WaitingForUserDecision:
                         Text.text = string.Empty;
                         break;
-                    case PatcherState.StartingApp:
+                    case UnityPatcherState.StartingApp:
                         Text.text = "Starting application...";
                         break;
-                    case PatcherState.UpdatingApp:
+                    case UnityPatcherState.UpdatingApp:
                         Text.text = "Updating application...";
                         break;
                 }

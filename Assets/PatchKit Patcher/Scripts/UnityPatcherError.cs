@@ -1,6 +1,6 @@
-﻿namespace PatchKit.Unity.Patcher
+﻿namespace PatchKit.Patcher.Unity
 {
-    public enum PatcherError
+    public enum UnityPatcherError
     {
         NoInternetConnection,
         NoPermissions,

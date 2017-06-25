@@ -1,5 +1,4 @@
-﻿using PatchKit.Unity.Patcher;
-using UniRx;
+﻿using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,17 +26,17 @@ namespace PatchKit.Patcher.Unity.UI
 
         private void Start()
         {
-            PatchKit.Unity.Patcher.Patcher.Instance.State.ObserveOnMainThread().Subscribe(state =>
+            UnityPatcher.Instance.State.ObserveOnMainThread().Subscribe(state =>
             {
-                _animator.SetBool("IsOpened", state == PatcherState.WaitingForUserDecision);
+                _animator.SetBool("IsOpened", state == UnityPatcherState.WaitingForUserDecision);
             }).AddTo(this);
 
-            PatchKit.Unity.Patcher.Patcher.Instance.CanStartApp.ObserveOnMainThread().Subscribe(canStartApp =>
+            UnityPatcher.Instance.CanStartApp.ObserveOnMainThread().Subscribe(canStartApp =>
             {
                 PlayButton.interactable = canStartApp;
             }).AddTo(this);
 
-            PatchKit.Unity.Patcher.Patcher.Instance.CanInstallApp.ObserveOnMainThread().Subscribe(canInstallApp =>
+            UnityPatcher.Instance.CanInstallApp.ObserveOnMainThread().Subscribe(canInstallApp =>
             {
                 _canInstallApp = canInstallApp;
                 if (_canInstallApp)
@@ -47,7 +46,7 @@ namespace PatchKit.Patcher.Unity.UI
                 CheckButton.interactable = _canInstallApp || _canCheckForAppUpdates;
             }).AddTo(this);
 
-            PatchKit.Unity.Patcher.Patcher.Instance.CanCheckForAppUpdates.ObserveOnMainThread().Subscribe(canCheckForAppUpdates =>
+            UnityPatcher.Instance.CanCheckForAppUpdates.ObserveOnMainThread().Subscribe(canCheckForAppUpdates =>
             {
                 _canCheckForAppUpdates = canCheckForAppUpdates;
                 if (_canCheckForAppUpdates)
@@ -68,18 +67,18 @@ namespace PatchKit.Patcher.Unity.UI
 
         private void OnPlayButtonClicked()
         {
-            PatchKit.Unity.Patcher.Patcher.Instance.SetUserDecision(PatchKit.Unity.Patcher.Patcher.UserDecision.StartApp);
+            UnityPatcher.Instance.SetUserDecision(UnityPatcher.UserDecision.StartApp);
         }
 
         private void OnCheckButtonClicked()
         {
             if(_canInstallApp)
             {
-                PatchKit.Unity.Patcher.Patcher.Instance.SetUserDecision(PatchKit.Unity.Patcher.Patcher.UserDecision.InstallApp);
+                UnityPatcher.Instance.SetUserDecision(UnityPatcher.UserDecision.InstallApp);
             }
             else if(_canCheckForAppUpdates)
             {
-                PatchKit.Unity.Patcher.Patcher.Instance.SetUserDecision(PatchKit.Unity.Patcher.Patcher.UserDecision.CheckForAppUpdates);
+                UnityPatcher.Instance.SetUserDecision(UnityPatcher.UserDecision.CheckForAppUpdates);
             }
         }
     }

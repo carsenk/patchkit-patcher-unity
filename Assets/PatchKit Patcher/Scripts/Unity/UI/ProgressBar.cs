@@ -1,5 +1,4 @@
-﻿using PatchKit.Unity.Patcher;
-using UniRx;
+﻿using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,15 +20,15 @@ namespace PatchKit.Patcher.Unity.UI
 
         private void Start()
         {
-            PatchKit.Unity.Patcher.Patcher.Instance.State.ObserveOnMainThread().Subscribe(state =>
+            UnityPatcher.Instance.State.ObserveOnMainThread().Subscribe(state =>
             {
-                if (state != PatcherState.UpdatingApp)
+                if (state != UnityPatcherState.UpdatingApp)
                 {
                     SetProgress(1.0);
                 }
             }).AddTo(this);
 
-            PatchKit.Unity.Patcher.Patcher.Instance.UpdateAppStatusChanged += status =>
+            UnityPatcher.Instance.UpdateAppStatusChanged += status =>
             {
                 SetProgress(status.Progress);
             };

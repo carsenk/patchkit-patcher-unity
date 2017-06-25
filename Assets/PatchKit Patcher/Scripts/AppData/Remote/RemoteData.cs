@@ -4,7 +4,6 @@ using PatchKit.Api;
 using PatchKit.Patcher.AppData.Remote.Downloaders;
 using PatchKit.Patcher.Debug;
 using PatchKit.Patcher.Unity;
-using PatchKit.Unity;
 
 namespace PatchKit.Patcher.AppData.Remote
 {

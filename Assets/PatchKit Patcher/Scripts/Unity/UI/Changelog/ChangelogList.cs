@@ -13,13 +13,13 @@ namespace PatchKit.Patcher.Unity.UI.Changelog
 
         protected override IEnumerator LoadCoroutine()
         {
-            while (!PatchKit.Unity.Patcher.Patcher.Instance.Data.HasValue || PatchKit.Unity.Patcher.Patcher.Instance.Data.Value.AppSecret == null)
+            while (!UnityPatcher.Instance.Data.HasValue || UnityPatcher.Instance.Data.Value.AppSecret == null)
             {
                 yield return null;
             }
 
             yield return
-                UnityThreading.StartThreadCoroutine(() => MainApiConnection.GetAppVersionList(PatchKit.Unity.Patcher.Patcher.Instance.Data.Value.AppSecret),
+                UnityThreading.StartThreadCoroutine(() => MainApiConnection.GetAppVersionList(UnityPatcher.Instance.Data.Value.AppSecret),
                     response =>
                     {
                         foreach (var version in response.OrderByDescending(version => version.Id))

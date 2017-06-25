@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using PatchKit.Patcher.Debug;
 using PatchKit.Patcher.Utilities;
-using PatchKit.Unity.Patcher;
 using UnityEngine;
 
 namespace PatchKit.Patcher.Unity

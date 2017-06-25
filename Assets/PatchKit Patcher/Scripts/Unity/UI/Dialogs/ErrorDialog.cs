@@ -1,6 +1,5 @@
 ﻿using PatchKit.Patcher.Cancellation;
 using PatchKit.Patcher.Utilities;
-using PatchKit.Unity.Patcher;
 using UnityEngine.UI;
 
 namespace PatchKit.Patcher.Unity.UI.Dialogs
@@ -14,27 +13,27 @@ namespace PatchKit.Patcher.Unity.UI.Dialogs
             OnDisplayed();
         }
 
-        public void Display(PatcherError error, CancellationToken cancellationToken)
+        public void Display(UnityPatcherError error, CancellationToken cancellationToken)
         {
             UnityDispatcher.Invoke(() => UpdateMessage(error)).WaitOne();
 
             Display(cancellationToken);
         }
 
-        private void UpdateMessage(PatcherError error)
+        private void UpdateMessage(UnityPatcherError error)
         {
             switch (error)
             {
-                case PatcherError.NoInternetConnection:
+                case UnityPatcherError.NoInternetConnection:
                     ErrorText.text = "Please check your internet connection.";
                     break;
-                case PatcherError.NoPermissions:
+                case UnityPatcherError.NoPermissions:
                     ErrorText.text = "Please check write permissions in application directory.";
                     break;
-                case PatcherError.NotEnoughDiskSpace:
+                case UnityPatcherError.NotEnoughDiskSpace:
                     ErrorText.text = "Not enough disk space.";
                     break;
-                case PatcherError.Other:
+                case UnityPatcherError.Other:
                     ErrorText.text = "Unknown error. Please try again.";
                     break;
             }

@@ -3,24 +3,22 @@ using System.Collections;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using PatchKit.Patcher;
 using PatchKit.Patcher.AppUpdater.Commands;
 using PatchKit.Patcher.Cancellation;
 using PatchKit.Patcher.Debug;
 using PatchKit.Patcher.Status;
-using PatchKit.Patcher.Unity;
 using PatchKit.Patcher.Unity.UI.Dialogs;
 using PatchKit.Patcher.Utilities;
 using UniRx;
 using UnityEngine;
 using CancellationToken = PatchKit.Patcher.Cancellation.CancellationToken;
 
-namespace PatchKit.Unity.Patcher
+namespace PatchKit.Patcher.Unity
 {
     // Assumptions:
     // - this component is always enabled (coroutines are always executed)
     // - this component is destroyed only when application quits
-    public class Patcher : MonoBehaviour
+    public class UnityPatcher : MonoBehaviour
     {
         private const string EditorAllowedSecret = "ac20fc855b75a7ea5f3e936dfd38ccd8";
 
@@ -33,17 +31,17 @@ namespace PatchKit.Unity.Patcher
             CheckForAppUpdates
         }
 
-        private static readonly DebugLogger DebugLogger = new DebugLogger(typeof(Patcher));
+        private static readonly DebugLogger DebugLogger = new DebugLogger(typeof(UnityPatcher));
 
-        private static Patcher _instance;
+        private static UnityPatcher _instance;
 
-        public static Patcher Instance
+        public static UnityPatcher Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = FindObjectOfType<Patcher>();
+                    _instance = FindObjectOfType<UnityPatcher>();
                 }
                 return _instance;
             }
@@ -111,9 +109,9 @@ namespace PatchKit.Unity.Patcher
             get { return _canCheckForAppUpdates; }
         }
 
-        private readonly ReactiveProperty<PatcherState> _state = new ReactiveProperty<PatcherState>(PatcherState.None);
+        private readonly ReactiveProperty<UnityPatcherState> _state = new ReactiveProperty<UnityPatcherState>(UnityPatcherState.None);
 
-        public IReadOnlyReactiveProperty<PatcherState> State
+        public IReadOnlyReactiveProperty<UnityPatcherState> State
         {
             get { return _state; }
         }
@@ -316,7 +314,7 @@ namespace PatchKit.Unity.Patcher
         {
             try
             {
-                _state.Value = PatcherState.None;
+                _state.Value = UnityPatcherState.None;
 
                 DebugLogger.Log("Patcher thread started.");
 
@@ -356,7 +354,7 @@ namespace PatchKit.Unity.Patcher
             }
             finally
             {
-                _state.Value = PatcherState.None;
+                _state.Value = UnityPatcherState.None;
 
                 if (_app != null)
                 {
@@ -371,7 +369,7 @@ namespace PatchKit.Unity.Patcher
             try
             {
                 DebugLogger.Log("Loading patcher data...");
-                _state.Value = PatcherState.LoadingPatcherData;
+                _state.Value = UnityPatcherState.LoadingPatcherData;
 
 #if UNITY_EDITOR
                 UnityDispatcher.Invoke(() =>
@@ -420,7 +418,7 @@ namespace PatchKit.Unity.Patcher
             {
                 DebugLogger.Log("Loading patcher configuration...");
 
-                _state.Value = PatcherState.LoadingPatcherConfiguration;
+                _state.Value = UnityPatcherState.LoadingPatcherConfiguration;
 
                 // TODO: Use PatcherConfigurationReader
                 _configuration = DefaultConfiguration;
@@ -450,7 +448,7 @@ namespace PatchKit.Unity.Patcher
             {
                 DebugLogger.Log("Waiting for user decision...");
 
-                _state.Value = PatcherState.WaitingForUserDecision;
+                _state.Value = UnityPatcherState.WaitingForUserDecision;
 
                 bool isInstalled = _app.IsInstalled();
 
@@ -558,13 +556,13 @@ namespace PatchKit.Unity.Patcher
                 }
                 else
                 {
-                    ThreadDisplayError(PatcherError.NoPermissions, cancellationToken);
+                    ThreadDisplayError(UnityPatcherError.NoPermissions, cancellationToken);
                 }
             }
             catch (NotEnoughtDiskSpaceException e)
             {
                 DebugLogger.LogException(e);
-                ThreadDisplayError(PatcherError.NotEnoughDiskSpace, cancellationToken);
+                ThreadDisplayError(UnityPatcherError.NotEnoughDiskSpace, cancellationToken);
             }
             catch (ThreadInterruptedException)
             {
@@ -586,11 +584,11 @@ namespace PatchKit.Unity.Patcher
                     "Error while executing user decision {0}: an exception has occured.", _userDecision));
                 DebugLogger.LogException(exception);
 
-                ThreadDisplayError(PatcherError.Other, cancellationToken);
+                ThreadDisplayError(UnityPatcherError.Other, cancellationToken);
             }
         }
 
-        private void ThreadDisplayError(PatcherError error, CancellationToken cancellationToken)
+        private void ThreadDisplayError(UnityPatcherError error, CancellationToken cancellationToken)
         {
             try
             {
@@ -623,7 +621,7 @@ namespace PatchKit.Unity.Patcher
 
         private void ThreadStartApp()
         {
-            _state.Value = PatcherState.StartingApp;
+            _state.Value = UnityPatcherState.StartingApp;
 
             var appStarter = new AppStarter(_app);
 
@@ -634,7 +632,7 @@ namespace PatchKit.Unity.Patcher
 
         private void ThreadUpdateApp(CancellationToken cancellationToken)
         {
-            _state.Value = PatcherState.UpdatingApp;
+            _state.Value = UnityPatcherState.UpdatingApp;
 
             _updateAppCancellationTokenSource = new CancellationTokenSource();
 

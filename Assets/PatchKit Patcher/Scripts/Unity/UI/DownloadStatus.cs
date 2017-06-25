@@ -1,5 +1,4 @@
-﻿using PatchKit.Unity.Patcher;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 
@@ -11,15 +10,15 @@ namespace PatchKit.Patcher.Unity.UI
 
         private void Start()
         {
-            PatchKit.Unity.Patcher.Patcher.Instance.State.ObserveOnMainThread().Subscribe(state =>
+            UnityPatcher.Instance.State.ObserveOnMainThread().Subscribe(state =>
             {
-                if (state != PatcherState.UpdatingApp)
+                if (state != UnityPatcherState.UpdatingApp)
                 {
                     Text.text = string.Empty;
                 }
             }).AddTo(this);
 
-            PatchKit.Unity.Patcher.Patcher.Instance.UpdateAppStatusChanged += status =>
+            UnityPatcher.Instance.UpdateAppStatusChanged += status =>
             {
                 if(status.IsDownloading)
                 {
