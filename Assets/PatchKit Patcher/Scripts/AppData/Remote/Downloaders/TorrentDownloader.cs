@@ -9,6 +9,7 @@ using PatchKit.Patcher.Debug;
 using PatchKit.Patcher.Unity;
 using PatchKit.Patcher.Utilities;
 using UnityEngine;
+using Microsoft.Practices.Unity;
 
 namespace PatchKit.Patcher.AppData.Remote.Downloaders
 {
@@ -271,7 +272,7 @@ namespace PatchKit.Patcher.AppData.Remote.Downloaders
 
             try
             {
-                _torrentClient = new TorrentClient(new UnityTorrentClientProcessStartInfoProvider());
+                _torrentClient = new TorrentClient(DependencyService.Container.Resolve<ITorrentClientProcessStartInfoProvider>());
                 DownloadTorrentFile(cancellationToken);
                 AddTorrent();
                 WaitForTorrentDownload(cancellationToken);
