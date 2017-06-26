@@ -199,6 +199,7 @@ namespace PatchKit.Patcher.Unity
 
         private void Update()
         {
+
             if (_thread == null || !_thread.IsAlive)
             {
                 DebugLogger.Log("Quitting application because patcher thread is not alive.");

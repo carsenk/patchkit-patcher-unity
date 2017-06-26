@@ -1,14 +1,17 @@
 ﻿using System;
+using Microsoft.Practices.Unity;
 
 namespace PatchKit.Patcher.Debug
 {
     public class DebugLogger
     {
+        private readonly IDebugLogWriter _logWriter;
         private readonly string _context;
 
         public DebugLogger(Type context)
         {
             _context = context.FullName;
+            _logWriter = DependencyService.Container.Resolve<IDebugLogWriter>();
         }
 
         private static string FormatMessage(string type, string message)
@@ -28,7 +31,7 @@ namespace PatchKit.Patcher.Debug
 
         public void Log(string message)
         {
-            UnityEngine.Debug.Log(FormatMessage("[   Log   ]", message));
+            _logWriter.Log(FormatMessage("[   Log   ]", message));
         }
 
         public void LogFormat(string message, params object[] args)
@@ -38,7 +41,7 @@ namespace PatchKit.Patcher.Debug
 
         public void LogWarning(string message)
         {
-            UnityEngine.Debug.LogWarning(FormatMessage("[ Warning ]", message));
+            _logWriter.LogWarning(FormatMessage("[ Warning ]", message));
         }
 
         public void LogWarningFormat(string message, params object[] args)
@@ -48,7 +51,7 @@ namespace PatchKit.Patcher.Debug
 
         public void LogError(string message)
         {
-            UnityEngine.Debug.LogError(FormatMessage("[  Error  ]", message));
+            _logWriter.LogError(FormatMessage("[  Error  ]", message));
         }
 
         public void LogErrorFormat(string message, params object[] args)
@@ -58,12 +61,12 @@ namespace PatchKit.Patcher.Debug
 
         public void LogException(Exception exception)
         {
-            UnityEngine.Debug.LogErrorFormat(FormatMessage("[Exception]", FormatExceptionMessage(exception)));
+            _logWriter.LogError(FormatMessage("[Exception]", FormatExceptionMessage(exception)));
             int innerExceptionCounter = 1;
             var innerException = exception.InnerException;
             while (innerException != null)
             {
-                UnityEngine.Debug.LogErrorFormat("Inner Exception {0}: {1}", innerExceptionCounter, FormatExceptionMessage(innerException));
+                _logWriter.LogError(string.Format("Inner Exception {0}: {1}", innerExceptionCounter, FormatExceptionMessage(innerException)));
                 innerException = innerException.InnerException;
             }
         }

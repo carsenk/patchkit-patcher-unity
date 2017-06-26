@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using PatchKit.Patcher.AppData.Local;
 using PatchKit.Patcher.AppData.Remote.Downloaders;
+using PatchKit.Patcher.Debug;
 using PatchKit.Patcher.Unity;
 
 namespace PatchKit.Patcher
@@ -14,6 +15,7 @@ namespace PatchKit.Patcher
             Container = new UnityContainer();
             Container.RegisterType<ICache, UnityCache>();
             Container.RegisterType<ITorrentClientProcessStartInfoProvider, UnityTorrentClientProcessStartInfoProvider>();
+            Container.RegisterInstance<IDebugLogWriter>(new UnityDebugLogWriter());
         }
     }
 }
