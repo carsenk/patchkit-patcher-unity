@@ -7,10 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Fixed
 - HTTP downloader resumes the download on error
+- Moving files after installation instead of copying them
+
+## [3.1.4]
+### Fixed
+- Fix TorrentDownloader progress reporting for big files
 
 ## [3.1.3]
 ### Added
-- Add miliseconds information to log date and time
+- Add milliseconds information to log date and time
 - Add KNOWNBUGS.md
 
 ### Removed
@@ -22,7 +27,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Fix problem with resource validation
-- Fix problems with overwritting files by downloader and unarchiver
+- Fix problems with overwriting files by downloader and unarchiver
 - Fix situation when user was asked for license key once again
 - Fix sending patcher logs to server
 - Fix problem with shared access violation when downloading torrents
@@ -32,7 +37,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Fix situation when user was asked for license key once again
 
 ### Changed
-- Add miliseconds information to log date and time
+- Add milliseconds information to log date and time
 - Improved overall stability
 
 ## [3.1.1]
