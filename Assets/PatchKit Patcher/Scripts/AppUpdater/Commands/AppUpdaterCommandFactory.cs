@@ -61,14 +61,16 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
         {
             var packagePath = context.App.DownloadDirectory.GetDiffPackagePath(versionId);
             var packageMetaPath = context.App.DownloadDirectory.GetDiffPackageMetaPath(versionId);
-            var versionDiffSummary = context.App.RemoteMetaData.GetDiffSummary(versionId);
             var packagePassword = context.App.RemoteData.GetDiffPackageResourcePassword(versionId);
+            var versionDiffSummary = context.App.RemoteMetaData.GetDiffSummary(versionId);
+            var versionContentSummary = context.App.RemoteMetaData.GetContentSummary(versionId);
 
             return new InstallDiffCommand(packagePath,
                 packageMetaPath,
                 packagePassword,
                 versionId,
                 versionDiffSummary,
+                versionContentSummary,
                 context.App.LocalDirectory,
                 context.App.LocalMetaData,
                 context.App.TemporaryDirectory);

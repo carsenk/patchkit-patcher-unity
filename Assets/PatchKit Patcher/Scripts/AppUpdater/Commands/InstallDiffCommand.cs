@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using PatchKit.Api.Models.Main;
 using PatchKit.Unity.Patcher.AppData;
@@ -10,7 +11,7 @@ using PatchKit.Unity.Utilities;
 
 namespace PatchKit.Unity.Patcher.AppUpdater.Commands
 {
-    public class InstallDiffCommand : BaseAppUpdaterCommand, IInstallDiffCommand
+    public class InstallDiffCommand: BaseAppUpdaterCommand, IInstallDiffCommand
     {
         private const string Suffix = "_"; // FIX: Bug #714
         private static readonly DebugLogger DebugLogger = new DebugLogger(typeof(InstallDiffCommand));
@@ -20,6 +21,7 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
         private readonly string _packagePassword;
         private readonly int _versionId;
         private readonly AppDiffSummary _versionDiffSummary;
+        private readonly AppContentSummary _versionControlSummary;
         private readonly ILocalDirectory _localData;
         private readonly ILocalMetaData _localMetaData;
         private readonly ITemporaryDirectory _temporaryData;
@@ -31,8 +33,8 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
         private Pack1Meta _pack1Meta;
 
         public InstallDiffCommand(string packagePath, string packageMetaPath, string packagePassword, int versionId,
-            AppDiffSummary versionDiffSummary, ILocalDirectory localData, ILocalMetaData localMetaData,
-            ITemporaryDirectory temporaryData)
+            AppDiffSummary versionDiffSummary, AppContentSummary versionContentSummary,
+            ILocalDirectory localData, ILocalMetaData localMetaData, ITemporaryDirectory temporaryData)
         {
             Checks.ArgumentValidVersionId(versionId, "versionId");
             // TODO: Check whether version diff summary is correct
@@ -45,6 +47,7 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
             _packagePassword = packagePassword;
             _versionId = versionId;
             _versionDiffSummary = versionDiffSummary;
+            _versionControlSummary = versionContentSummary;
             _localData = localData;
             _localMetaData = localMetaData;
             _temporaryData = temporaryData;
@@ -79,7 +82,7 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
             base.Execute(cancellationToken);
 
             Checks.FileExists(_packagePath);
-            
+
             if (_versionDiffSummary.CompressionMethod == "pack1")
             {
                 Assert.IsTrue(File.Exists(_packageMetaPath),
@@ -104,10 +107,10 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
                 IUnarchiver unarchiver = CreateUnrachiver(packageDirPath, out usedSuffix);
 
                 _unarchivePackageStatusReporter.OnProgressChanged(0.0, "Unarchiving package...");
-                
+
                 unarchiver.UnarchiveProgressChanged += (name, isFile, entry, amount) =>
                 {
-                    _unarchivePackageStatusReporter.OnProgressChanged(entry/(double) amount, "Unarchiving package...");
+                    _unarchivePackageStatusReporter.OnProgressChanged(entry / (double)amount, "Unarchiving package...");
                 };
 
                 unarchiver.Unarchive(cancellationToken);
@@ -155,7 +158,7 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
             int counter = 0;
 
             _removeFilesStatusReporter.OnProgressChanged(0.0, "Installing package...");
-            
+
             foreach (var fileName in files)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -170,7 +173,7 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
                 _localMetaData.UnregisterEntry(fileName);
 
                 counter++;
-                _removeFilesStatusReporter.OnProgressChanged(counter/(double)_versionDiffSummary.RemovedFiles.Length, "Installing package...");
+                _removeFilesStatusReporter.OnProgressChanged(counter / (double)_versionDiffSummary.RemovedFiles.Length, "Installing package...");
             }
 
             foreach (var dirName in directories)
@@ -188,7 +191,7 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
                 //_localMetaData.UnregisterEntry(dirName);
 
                 counter++;
-                _removeFilesStatusReporter.OnProgressChanged(counter/(double)_versionDiffSummary.RemovedFiles.Length, "Installing package...");
+                _removeFilesStatusReporter.OnProgressChanged(counter / (double)_versionDiffSummary.RemovedFiles.Length, "Installing package...");
             }
 
             _removeFilesStatusReporter.OnProgressChanged(1.0, string.Empty);
@@ -198,9 +201,9 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
             CancellationToken cancellationToken)
         {
             DebugLogger.Log("Processing added files.");
-            
+
             _addFilesStatusReporter.OnProgressChanged(0.0, "Installing package...");
-            
+
             for (int i = 0; i < _versionDiffSummary.AddedFiles.Length; i++)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -232,7 +235,7 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
                     _localMetaData.RegisterEntry(entryName, _versionId);
                 }
 
-                _addFilesStatusReporter.OnProgressChanged((i + 1)/(double)_versionDiffSummary.AddedFiles.Length, "Installing package...");
+                _addFilesStatusReporter.OnProgressChanged((i + 1) / (double)_versionDiffSummary.AddedFiles.Length, "Installing package...");
             }
 
             _addFilesStatusReporter.OnProgressChanged(1.0, "Installing package...");
@@ -244,39 +247,47 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
             DebugLogger.Log("Processing modified files.");
 
             _modifiedFilesStatusReporter.OnProgressChanged(0.0, "Installing package...");
-            
+
             for (int i = 0; i < _versionDiffSummary.ModifiedFiles.Length; i++)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var entryName = _versionDiffSummary.ModifiedFiles[i];
-                
+
                 if (!entryName.EndsWith("/"))
                 {
                     DebugLogger.LogFormat("Patching {0} -> {1}", packageDirPath, entryName);
                     PatchFile(entryName, suffix, packageDirPath);
-
                     _localMetaData.RegisterEntry(entryName, _versionId);
-                }
-                else
-                {
-                    // TODO: Uncomment this after fixing directory registration in install content command
-                    //_localMetaData.RegisterEntry(entryName, _versionId);
+
+                    string filePath = _localData.Path.PathCombine(entryName);
+                    string hash = HashCalculator.ComputeFileHash(filePath);
+                    string fileHash = GetHashForFile(entryName);
+                    if (hash != fileHash)
+                    {
+                        throw new InstallerException(string.Format(
+                            "Patched file hash missmatch at version: {0}, {1}", _versionId, entryName));
+                    }
+                    else
+                    {
+                        // TODO: Uncomment this after fixing directory registration in install content command
+                        //_localMetaData.RegisterEntry(entryName, _versionId);
+                    }
+
+                    _modifiedFilesStatusReporter.OnProgressChanged((i + 1) / (double)_versionDiffSummary.ModifiedFiles.Length, "Installing package...");
                 }
 
-                _modifiedFilesStatusReporter.OnProgressChanged((i + 1)/(double)_versionDiffSummary.ModifiedFiles.Length, "Installing package...");
+                _modifiedFilesStatusReporter.OnProgressChanged(1.0, "Installing package...");
             }
-
-            _modifiedFilesStatusReporter.OnProgressChanged(1.0, "Installing package...");
         }
-        
+
         // TODO: Temporary solution for situation when .app directory is not deleted
         private void DeleteEmptyMacAppDirectories()
         {
             if (Platform.IsOSX())
             {
                 DebugLogger.Log("Deleting empty Mac OSX '.app' directories...");
-            
+
                 var appDirectories = Directory
                     .GetFileSystemEntries(_localData.Path)
                     .Where(s => Directory.Exists(s) &&
@@ -290,7 +301,7 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
                         DirectoryOperations.Delete(dir, true);
                     }
                 }
-            
+
                 DebugLogger.Log("Empty Mac OSX '.app' directories has been deleted.");
             }
         }
@@ -312,7 +323,7 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
             if (fileVersion != _versionId - 1)
             {
                 throw new InstallerException(string.Format(
-                    "Couldn't patch file <{0}> - expected file with previous version ({1}) but the file version is {2}.", 
+                    "Couldn't patch file <{0}> - expected file with previous version ({1}) but the file version is {2}.",
                     fileName, _versionId - 1, fileVersion));
             }
 
@@ -332,6 +343,18 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
                 {
                     FileOperations.Delete(newFilePath);
                 }
+            }
+        }
+
+        private string GetHashForFile(string entryName)
+        {
+            try
+            {
+                return _versionControlSummary.Files.First(acsf => acsf.Path == entryName).Hash;
+            }
+            catch (Exception ex)
+            {
+                throw new InstallerException(string.Format("Can not find hash for patched file: {0}", entryName));
             }
         }
     }
