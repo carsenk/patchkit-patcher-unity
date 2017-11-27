@@ -268,17 +268,17 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
                         throw new InstallerException(string.Format(
                             "Patched file hash missmatch at version: {0}, {1}", _versionId, entryName));
                     }
-                    else
-                    {
-                        // TODO: Uncomment this after fixing directory registration in install content command
-                        //_localMetaData.RegisterEntry(entryName, _versionId);
-                    }
-
-                    _modifiedFilesStatusReporter.OnProgressChanged((i + 1) / (double)_versionDiffSummary.ModifiedFiles.Length, "Installing package...");
+                }
+                else
+                {
+                    // TODO: Uncomment this after fixing directory registration in install content command
+                    //_localMetaData.RegisterEntry(entryName, _versionId);
                 }
 
-                _modifiedFilesStatusReporter.OnProgressChanged(1.0, "Installing package...");
+                _modifiedFilesStatusReporter.OnProgressChanged((i + 1) / (double)_versionDiffSummary.ModifiedFiles.Length, "Installing package...");
             }
+
+            _modifiedFilesStatusReporter.OnProgressChanged(1.0, "Installing package...");
         }
 
         // TODO: Temporary solution for situation when .app directory is not deleted
