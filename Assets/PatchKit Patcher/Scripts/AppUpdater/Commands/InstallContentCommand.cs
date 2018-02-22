@@ -25,6 +25,7 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
         private readonly AppContentSummary _versionContentSummary;
         private readonly ILocalDirectory _localData;
         private readonly ILocalMetaData _localMetaData;
+        private readonly IZipUnarchiver _zipUnarchiver = DependencyResolver.Resolve<IZipUnarchiver>();
 
         private OperationStatus _copyFilesStatus;
         private OperationStatus _unarchivePackageStatus;
@@ -93,7 +94,7 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
             }
 
             DebugLogger.Log("Installing content.");
-            
+
             using (var packageDir = new TemporaryDirectory(_packagePath + ".temp_unpack_" + Path.GetRandomFileName()))
             {
                 DebugLogger.LogVariable(packageDir.Path, "packageDirPath");
@@ -107,17 +108,19 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
                 _unarchivePackageStatus.Description.Value = "Unarchiving package...";
                 _unarchivePackageStatus.Progress.Value = 0.0;
 
-                unarchiver.UnarchiveProgressChanged += (name, isFile, entry, amount, entryProgress) =>
+                UnarchiveProgressChangedHandler onUnarchiveProgress = (name, isFile, entry, amount, entryProgress) =>
                 {
                     var entryMinProgress = (entry - 1) / (double) amount;
                     var entryMaxProgress = entry / (double) amount;
 
-                    _unarchivePackageStatus.Progress.Value = entryMinProgress + (entryMaxProgress - entryMinProgress) * entryProgress;
+                    _unarchivePackageStatus.Progress.Value =
+                        entryMinProgress + (entryMaxProgress - entryMinProgress) * entryProgress;
 
-                    _unarchivePackageStatus.Description.Value = string.Format("Unarchiving package ({0}/{1})...", entry, amount);
+                    _unarchivePackageStatus.Description.Value =
+                        string.Format("Unarchiving package ({0}/{1})...", entry, amount);
                 };
 
-                unarchiver.Unarchive(cancellationToken);
+                Unarchive(packageDir.Path, onUnarchiveProgress, cancellationToken);
 
                 _unarchivePackageStatus.Progress.Value = 1.0;
                 _unarchivePackageStatus.IsActive.Value = false;
@@ -135,7 +138,8 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
                     InstallFile(_versionContentSummary.Files[i].Path, packageDir.Path, usedSuffix);
 
                     _copyFilesStatus.Progress.Value = (i + 1) / (double) _versionContentSummary.Files.Length;
-                    _copyFilesStatus.Description.Value = string.Format("Installing ({0}/{1})...", i + 1, _versionContentSummary.Files.Length);
+                    _copyFilesStatus.Description.Value = string.Format("Installing ({0}/{1})...", i + 1,
+                        _versionContentSummary.Files.Length);
                 }
 
                 _copyFilesStatus.Progress.Value = 1.0;
@@ -143,16 +147,20 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
             }
         }
 
-        private IUnarchiver CreateUnrachiver(string destinationDir, out string usedSuffix)
+        private void Unarchive(string destinationDir, UnarchiveProgressChangedHandler onUnarchiveProgress, CancellationToken cancellationToken,
+            out string usedSuffix)
         {
             switch (_versionContentSummary.CompressionMethod)
             {
                 case "zip":
                     usedSuffix = string.Empty;
-                    return new ZipUnarchiver(_packagePath, destinationDir, _packagePassword);
+                    _zipUnarchiver.Unarchive(new ZipInfo(_packagePath, destinationDir, _packagePassword), onUnarchiveProgress, cancellationToken);
+                    return;
                 case "pack1":
                     usedSuffix = Suffix;
-                    return new Pack1Unarchiver(_packagePath, _pack1Meta, destinationDir, _packagePassword, Suffix);
+                    var pack1Unarchiver = new Pack1Unarchiver(_packagePath, _pack1Meta, destinationDir, _packagePassword, Suffix);
+                    pack1Unarchiver.Unarchive(cancellationToken);
+                    return;
                 default:
                     throw new InstallerException(string.Format("Unknown compression method: {0}",
                         _versionContentSummary.CompressionMethod));
@@ -161,9 +169,9 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
 
         private void InstallFile(string fileName, string packageDirPath, string suffix)
         {
-            DebugLogger.Log(string.Format("Installing file {0}", fileName+suffix));
+            DebugLogger.Log(string.Format("Installing file {0}", fileName + suffix));
 
-            string sourceFilePath = Path.Combine(packageDirPath, fileName+suffix);
+            string sourceFilePath = Path.Combine(packageDirPath, fileName + suffix);
 
             if (!File.Exists(sourceFilePath))
             {
@@ -178,7 +186,7 @@ namespace PatchKit.Unity.Patcher.AppUpdater.Commands
                 DebugLogger.LogFormat("Destination file {0} already exists, removing it.", destinationFilePath);
                 FileOperations.Delete(destinationFilePath);
             }
-            
+
             FileOperations.Move(sourceFilePath, destinationFilePath);
             _localMetaData.RegisterEntry(fileName, _versionId);
         }

@@ -3,6 +3,8 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using Ionic.Zlib;
+using JetBrains.Annotations;
+using PatchKit.Logging;
 using PatchKit.Network;
 using PatchKit.Unity.Patcher.Cancellation;
 using PatchKit.Unity.Patcher.Data;
@@ -16,21 +18,10 @@ namespace PatchKit.Unity.Patcher.AppData.Local
     /// Pack1 format unarchiver.
     /// http://redmine.patchkit.net/projects/patchkit-documentation/wiki/Pack1_File_Format
     /// </summary>
-    public class Pack1Unarchiver : IUnarchiver
+    public class Pack1Unarchiver : IPack1Unarchiver
     {
-        private static readonly DebugLogger DebugLogger = new DebugLogger(typeof(Pack1Unarchiver));
+        private readonly ILogger _logger;
 
-        private readonly string _packagePath;
-        private readonly Pack1Meta _metaData;
-        private readonly string _destinationDirPath;
-        private readonly string _suffix;
-        private readonly byte[] _key;
-        private readonly byte[] _iv;
-
-        /// <summary>
-        /// The range (in bytes) of the partial pack1 source file
-        /// </summary>
-        private readonly BytesRange _range;
 
         public event UnarchiveProgressChangedHandler UnarchiveProgressChanged;
 
@@ -60,7 +51,6 @@ namespace PatchKit.Unity.Patcher.AppData.Local
             DebugLogger.LogConstructor();
             DebugLogger.LogVariable(packagePath, "packagePath");
             DebugLogger.LogVariable(destinationDirPath, "destinationDirPath");
-            DebugLogger.LogVariable(suffix, "suffix");
 
             _packagePath = packagePath;
             _metaData = metaData;
@@ -68,43 +58,7 @@ namespace PatchKit.Unity.Patcher.AppData.Local
             _suffix = suffix;
             _range = range;
 
-            using (var sha256 = SHA256.Create())
-            {
-                _key = sha256.ComputeHash(key);
-            }
 
-            _iv = Convert.FromBase64String(_metaData.Iv);
-        }
-
-        public void Unarchive(CancellationToken cancellationToken)
-        {
-            int entry = 1;
-            
-            DebugLogger.Log("Unpacking " + _metaData.Files.Length + " files...");
-            foreach (var file in _metaData.Files)
-            {
-                OnUnarchiveProgressChanged(file.Name, file.Type == Pack1Meta.RegularFileType, entry, _metaData.Files.Length, 0.0);
-
-                var currentFile = file;
-                var currentEntry = entry;
-
-                if (CanUnpack(file))
-                {
-                    Unpack(file, progress =>
-                    {
-                        OnUnarchiveProgressChanged(currentFile.Name, currentFile.Type == Pack1Meta.RegularFileType, currentEntry, _metaData.Files.Length, progress);
-                    }, cancellationToken);
-                }
-                else
-                {
-                    DebugLogger.LogWarning(string.Format("The file {0} couldn't be unpacked.", file.Name));
-                }
-
-                OnUnarchiveProgressChanged(file.Name, file.Type == Pack1Meta.RegularFileType, entry, _metaData.Files.Length, 1.0);
-
-                entry++;
-            }
-            DebugLogger.Log("Unpacking finished succesfully!");
         }
 
         public void UnarchiveSingleFile(Pack1Meta.FileEntry file, CancellationToken cancellationToken, string destinationDirPath = null)
@@ -121,19 +75,93 @@ namespace PatchKit.Unity.Patcher.AppData.Local
             OnUnarchiveProgressChanged(file.Name, file.Type == Pack1Meta.RegularFileType, 0, 1, 1.0);
         }
 
-        private bool CanUnpack(Pack1Meta.FileEntry file)
+        public void Unarchive(Pack1Info info,
+            string destinationDirPath,
+            string suffix,
+            UnarchiveProgressChangedHandler onProgressChanged,
+            out string usedSuffix,
+            CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(destinationDirPath))
+            {
+                throw new ArgumentException("Value cannot be null or empty.", "destinationDirPath");
+            }
+
+            if (suffix == null)
+            {
+                throw new ArgumentNullException("suffix");
+            }
+
+            if (onProgressChanged == null)
+            {
+                throw new ArgumentNullException("onProgressChanged");
+            }
+
+            try
+            {
+                _logger.LogDebug(string.Format("Unarchiving pack1 from {0} to {1}", info.Path, destinationDirPath));
+                //TODO: Log package password here after introducing log censoring
+
+                _logger.LogTrace("suffix = " + suffix);
+                usedSuffix = suffix;
+
+                byte[] key;
+                using (var sha256 = SHA256.Create())
+                {
+                    key = sha256.ComputeHash(Encoding.ASCII.GetBytes(info.Password));
+                }
+
+                var iv = Convert.FromBase64String(info.Meta.Iv);
+
+                int entry = 1;
+
+                foreach (var file in info.Meta.Files)
+                {
+                    onProgressChanged(file.Name, file.Type == Pack1Meta.RegularFileType, entry, info.Meta.Files.Length, 0.0);
+
+                    var currentFile = file;
+                    var currentEntry = entry;
+
+                    if (CanUnpack(file))
+                    {
+                        Unpack(file, progress =>
+                        {
+                            onProgressChanged(currentFile.Name, currentFile.Type == Pack1Meta.RegularFileType, currentEntry, _metaData.Files.Length, progress);
+                        }, cancellationToken);
+                    }
+                    else
+                    {
+                        DebugLogger.LogWarning(string.Format("The file {0} couldn't be unpacked.", file.Name));
+                    }
+
+                    onProgressChanged(file.Name, file.Type == Pack1Meta.RegularFileType, entry, info.Meta.Files.Length, 1.0);
+
+                    entry++;
+                }
+
+                _logger.LogDebug("Pack1 unarchived.");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Unarchiving pack1 failed.", e);
+                throw;
+            }
+
+        }
+
+        private bool CanUnpack(BytesRange range, Pack1Meta.FileEntry file)
         {
             if (file.Type != Pack1Meta.RegularFileType)
             {
                 return true;
             }
 
-            if (_range.Start == 0 && _range.End == -1)
+            if (range.Start == 0 && range.End == -1)
             {
                 return true;
             }
 
-            return file.Offset >= _range.Start && file.Offset + file.Size <= _range.End;
+            return file.Offset >= range.Start && file.Offset + file.Size <= range.End;
         }
 
         private void Unpack(Pack1Meta.FileEntry file, Action<double> progress, CancellationToken cancellationToken, string destinationDirPath = null)
@@ -160,30 +188,35 @@ namespace PatchKit.Unity.Patcher.AppData.Local
 
         }
 
-        private void UnpackDirectory(Pack1Meta.FileEntry file)
+        private void UnpackDirectory(string destinationDirPath, Pack1Meta.FileEntry file)
         {
-            string destPath = Path.Combine(_destinationDirPath, file.Name);
+            string destPath = Path.Combine(destinationDirPath, file.Name);
 
             DebugLogger.Log("Creating directory " + destPath);
             Directory.CreateDirectory(destPath);
             DebugLogger.Log("Directory " + destPath + " created successfully!");
         }
 
-        private void UnpackSymlink(Pack1Meta.FileEntry file)
+        private void UnpackSymlink(string destinationDirPath, Pack1Meta.FileEntry file)
         {
-            string destPath = Path.Combine(_destinationDirPath, file.Name);
+            string destPath = Path.Combine(destinationDirPath, file.Name);
             DebugLogger.Log("Creating symlink: " + destPath);
             // TODO: how to create a symlink?
         }
 
-        private void UnpackRegularFile(Pack1Meta.FileEntry file, Action<double> onProgress, CancellationToken cancellationToken, string destinationDirPath = null)
+        private void UnpackRegularFile(string pack1Path,
+            string destinationDirPath,
+            string suffix,
+            Pack1Meta.FileEntry file,
+            Action<double> onProgress,
+            CancellationToken cancellationToken)
         {
-            string destPath = Path.Combine(destinationDirPath == null ? _destinationDirPath : destinationDirPath, file.Name + _suffix);
+            string destPath = Path.Combine(destinationDirPath, file.Name + suffix);
             DebugLogger.LogFormat("Unpacking regular file {0} to {1}", file, destPath);
 
             Files.CreateParents(destPath);
 
-            RijndaelManaged rijn = new RijndaelManaged
+            var rijn = new RijndaelManaged
             {
                 Mode = CipherMode.CBC,
                 Padding = PaddingMode.None,
@@ -192,7 +225,7 @@ namespace PatchKit.Unity.Patcher.AppData.Local
 
             ICryptoTransform decryptor = rijn.CreateDecryptor(_key, _iv);
 
-            using (var fs = new FileStream(_packagePath, FileMode.Open))
+            using (var fs = new FileStream(pack1Path, FileMode.Open))
             {
                 fs.Seek(file.Offset.Value - _range.Start, SeekOrigin.Begin);
 
@@ -223,7 +256,7 @@ namespace PatchKit.Unity.Patcher.AppData.Local
         {
             using (var cryptoStream = new CryptoStream(sourceStream, decryptor, CryptoStreamMode.Read))
             {
-                using (var gzipStream = new GZipStream(cryptoStream, Ionic.Zlib.CompressionMode.Decompress))
+                using (var gzipStream = new GZipStream(cryptoStream, CompressionMode.Decompress))
                 {
                     long bytesProcessed = 0;
                     const int bufferSize = 128 * 1024;
@@ -237,15 +270,6 @@ namespace PatchKit.Unity.Patcher.AppData.Local
                         onProgress((double) gzipStream.Position / file.Size.Value);
                     }
                 }
-            }
-        }
-
-        protected virtual void OnUnarchiveProgressChanged(string name, bool isFile, int entry, int amount, double entryProgress)
-        {
-            var handler = UnarchiveProgressChanged;
-            if (handler != null)
-            {
-                handler(name, isFile, entry, amount, entryProgress);
             }
         }
     }

@@ -1,79 +1,94 @@
-﻿using Ionic.Zip;
-using PatchKit.Unity.Patcher.Debug;
+﻿using System;
+using Ionic.Zip;
+using JetBrains.Annotations;
+using PatchKit.Logging;
 using PatchKit.Unity.Patcher.Cancellation;
 
 namespace PatchKit.Unity.Patcher.AppData.Local
 {
     /// <summary>
-    /// The unarchiver.
+    /// Zip unarchiver.
     /// </summary>
-    public class ZipUnarchiver : IUnarchiver
+    public class ZipUnarchiver : IZipUnarchiver
     {
-        private static readonly DebugLogger DebugLogger = new DebugLogger(typeof(ZipUnarchiver));
+        private readonly ILogger _logger;
 
-        private readonly string _packagePath;
-        private readonly string _destinationDirPath;
-        private readonly string _password;
-
-        private bool _unarchiveHasBeenCalled;
-
-        public event UnarchiveProgressChangedHandler UnarchiveProgressChanged;
-
-        public ZipUnarchiver(string packagePath, string destinationDirPath, string password = null)
+        public ZipUnarchiver([NotNull] ILogger logger)
         {
-            Checks.ArgumentFileExists(packagePath, "packagePath");
-            Checks.ArgumentDirectoryExists(destinationDirPath, "destinationDirPath");
+            if (logger == null)
+            {
+                throw new ArgumentNullException("logger");
+            }
 
-            DebugLogger.LogConstructor();
-            DebugLogger.LogVariable(packagePath, "packagePath");
-            DebugLogger.LogVariable(destinationDirPath, "destinationDirPath");
-
-            _packagePath = packagePath;
-            _destinationDirPath = destinationDirPath;
-            _password = password;
+            _logger = logger;
         }
 
-        public void Unarchive(CancellationToken cancellationToken)
+        public void Unarchive(ZipInfo info,
+            string destinationDirPath,
+            string suffix,
+            UnarchiveProgressChangedHandler onProgressChanged,
+            out string usedSuffix,
+            CancellationToken cancellationToken)
         {
-            Assert.MethodCalledOnlyOnce(ref _unarchiveHasBeenCalled, "Unarchive");
-
-            DebugLogger.Log("Unarchiving.");
-
-            using (var zip = ZipFile.Read(_packagePath))
+            if (string.IsNullOrEmpty(destinationDirPath))
             {
-                zip.Password = _password;
+                throw new ArgumentException("Value cannot be null or empty.", "destinationDirPath");
+            }
 
-                int entry = 1;
+            if (suffix == null)
+            {
+                throw new ArgumentNullException("suffix");
+            }
 
-                foreach (var zipEntry in zip)
+            if (onProgressChanged == null)
+            {
+                throw new ArgumentNullException("onProgressChanged");
+            }
+
+            try
+            {
+                _logger.LogDebug(string.Format("Unarchiving zip from {0} to {1}", info.Path, destinationDirPath));
+                //TODO: Log package password here after introducing log censoring
+
+                _logger.LogDebug(string.Format(
+                    "Requested suffix equals '{0}' but this zip unarchiver doesn't support suffixes so it won't be used.",
+                    suffix));
+
+                usedSuffix = string.Empty;
+
+                using (var zip = ZipFile.Read(info.Path))
                 {
-                    OnUnarchiveProgressChanged(zipEntry.FileName, !zipEntry.IsDirectory, entry, zip.Count, 0.0);
+                    zip.Password = info.Password;
 
-                    cancellationToken.ThrowIfCancellationRequested();
+                    int entry = 1;
 
-                    UnarchiveEntry(zipEntry);
+                    foreach (var zipEntry in zip)
+                    {
+                        onProgressChanged(zipEntry.FileName, !zipEntry.IsDirectory, entry, zip.Count, 0.0);
 
-                    OnUnarchiveProgressChanged(zipEntry.FileName, !zipEntry.IsDirectory, entry, zip.Count, 1.0);
-                    
-                    entry++;
+                        cancellationToken.ThrowIfCancellationRequested();
+
+                        _logger.LogDebug(string.Format("Unarchving entry {0}/{1}...", entry, zip.Count));
+                        _logger.LogTrace("entryName = " + zipEntry.FileName);
+
+                        zipEntry.Extract(destinationDirPath, ExtractExistingFileAction.OverwriteSilently);
+
+                        _logger.LogDebug(string.Format("Entry {0}/{1} unarchived.", entry, zip.Count));
+
+                        onProgressChanged(zipEntry.FileName, !zipEntry.IsDirectory, entry, zip.Count, 1.0);
+
+                        entry++;
+                    }
                 }
+
+                _logger.LogDebug("Zip unarchived.");
             }
-        }
-
-        private void UnarchiveEntry(ZipEntry zipEntry)
-        {
-            DebugLogger.Log(string.Format("Unarchiving entry {0}", zipEntry.FileName));
-
-            zipEntry.Extract(_destinationDirPath, ExtractExistingFileAction.OverwriteSilently);
-        }
-
-        protected virtual void OnUnarchiveProgressChanged(string name, bool isFile, int entry, int amount, double entryProgress)
-        {
-            var handler = UnarchiveProgressChanged;
-            if (handler != null)
+            catch (Exception e)
             {
-                handler(name, isFile, entry, amount, entryProgress);
+                _logger.LogError("Unarchving zip failed.", e);
+                throw;
             }
+
         }
     }
 }
