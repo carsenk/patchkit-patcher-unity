@@ -107,7 +107,6 @@ namespace PatchKit.Unity.Patcher
                 {
                     DebugLogger.LogWarning("File in metadata, but not found on disk: " + fileName + ", search path: " +
                                            path);
-                    return false;
                 }
 
                 int fileVersion = LocalMetaData.GetEntryVersionId(fileName);

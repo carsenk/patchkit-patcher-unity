@@ -784,11 +784,12 @@ namespace PatchKit.Unity.Patcher
                 _localVersionId.Value = _app.GetInstalledVersionId();
             }
 
+            var appUpdaterContext = new AppUpdaterContext(_app, _configuration.AppUpdaterConfiguration);
             _updateAppCancellationTokenSource = new CancellationTokenSource();
 
             using (cancellationToken.Register(() => _updateAppCancellationTokenSource.Cancel()))
             {
-                var appUpdater = new AppUpdater.AppUpdater( new AppUpdaterContext( _app, _configuration.AppUpdaterConfiguration ) );
+                var appUpdater = new AppUpdater.AppUpdater(appUpdaterContext);
 
                 try
                 {
